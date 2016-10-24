@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Helper;
 use DB;
 use View;
+use Cache;
 
 class BlockController extends Controller
 {
@@ -54,6 +55,7 @@ class BlockController extends Controller
 
     public static function banner(){
         $data = DB::table('banner')->select('name','image')->where(['status' => 1])->orderBy('order','desc')->orderBy('id','desc')->get();
+        
     	return view('frontend.block.home.banner',compact('data'));
     }
 
@@ -89,6 +91,7 @@ class BlockController extends Controller
 
     public static function services(){
         $cat = DB::table('posts_category')->select('id','name','alias')->where(['status' => 1 ,'pos_home' => 1])->orderBy('order','desc')->orderBy('id','desc')->first();
+        
         if(isset($cat)){
             $data = DB::table('posts')->where(['status' => 1 , 'fk_catid' => $cat->id])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','description')->limit(10)->get();
         }
@@ -102,11 +105,21 @@ class BlockController extends Controller
 
     public static function website_intro(){
         $data = DB::table('posts')->where(['status' => 1,'IsCustomer' => 1])->orderBy('order','desc')->orderBy('id','desc')->select('id','name','content')->first();
+        
         return view('frontend.block.home.website_intro',compact('data'));
     }
 
     public static function support_online(){
-        $data = DB::table('users')->where(['support_online' => 1 ])->get();
+        if(Cache::has('support_online')) //Kiểm tra xem trong cache có chứa các FAQ không
+        {
+            $data = Cache::get('support_online'); //Trả về các FAQ nếu có
+        }
+        else
+        {
+            $data = DB::table('users')->where(['support_online' => 1 ])->get();//Lấy tất cả các FAQ trong CSDL
+            Cache::put('support_online',$data,60); //Cho tất cả các FAQ vào bộ nhớ cache
+        }
+        
         return view('frontend.block.support_online',compact('data'));
     }
 
@@ -123,7 +136,16 @@ class BlockController extends Controller
     
 
     public static function menu_footer(){
-        $data = DB::table('menu')->select('id','name','alias','cursor')->where(['fk_parentid' => 0 , 'status' => 1 , 'menu_footer' => 1])->orderBy('order','desc')->get();
+        if(Cache::has('menu_footer')) //Kiểm tra xem trong cache có chứa các FAQ không
+        {
+            $data = Cache::get('menu_footer'); //Trả về các FAQ nếu có
+        }
+        else
+        {
+            $data = DB::table('menu')->select('id','name','alias','cursor')->where(['fk_parentid' => 0 , 'status' => 1 , 'menu_footer' => 1])->orderBy('order','desc')->get();//Lấy tất cả các FAQ trong CSDL
+            Cache::put('menu_footer',$data,60); //Cho tất cả các FAQ vào bộ nhớ cache
+        }
+        
         return view('frontend.block.menu_footer',compact('data'));
     }
 }

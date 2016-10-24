@@ -12,6 +12,7 @@ use DB;
 use View;
 use Route;
 use Block;
+use Cache;
 
 class PageController extends Controller
 {
@@ -21,12 +22,25 @@ class PageController extends Controller
     public $product_category_all = '';
 
     public function __construct(){
-        $menus = DB::table('menu')->select('id','name','alias','cursor','fk_parentid')->where(['status' => 1 , 'menu_header' => 1])->orderBy('order','desc')->get();
+        if(Cache::has('menus')) //Kiểm tra xem trong cache có chứa các FAQ không
+        {
+            $menus = Cache::get('menus'); //Trả về các FAQ nếu có
+        }
+        else
+        {
+            $menus = DB::table('menu')->select('id','name','alias','cursor','fk_parentid')->where(['status' => 1 , 'menu_header' => 1])->orderBy('order','desc')->get();
+            Cache::put('menus',$menus,60); //Cho tất cả các FAQ vào bộ nhớ cache
+        }
+        
         View::share('menus',$menus);
     }
 
     
     public function home(){
+        if(Cache::has('home')) 
+        {
+            return Cache::get('home'); 
+        }
         $title = $this->title;
         $description = $this->description;
         $keywords = $this->keywords;
@@ -38,7 +52,20 @@ class PageController extends Controller
         }
         
         
-        return view('frontend.home',compact('title_posts_sidebar','posts_sidebar','customer_footer','title','description','keywords','product_category'));
+        
+        // $view = View::make('frontend.home', array(
+        //     'title_posts_sidebar' => $title_posts_sidebar,
+        //     'posts_sidebar' => $posts_sidebar,
+        //     'customer_footer' => $customer_footer,
+        //     'title' => $title,
+        //     'description' => $description,
+        //     'keywords' => $keywords
+        // ))->render();
+        $view = view('frontend.home',compact('title_posts_sidebar','posts_sidebar','customer_footer','title','description','keywords'))->render();
+        Cache::put('home',$view,5);
+        return $view; 
+        
+        
     }
 
     public function product_category($alias,$filter = ''){
@@ -80,6 +107,7 @@ class PageController extends Controller
     }
 
     public function posts_category($alias,$view = 'list'){
+
         $index = DB::table('posts_category')->where('id',$alias)->orWhere('alias',$alias)->first();
         $posts = DB::table('posts')->where(['status' => 1 , 'fk_catid' => $index->id])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','description','create_at')->paginate(10);
         $posts_sidebar = DB::table('posts')->where(['status' => 1 ])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','create_at')->limit(5)->get();
@@ -131,12 +159,18 @@ class PageController extends Controller
     }
 
     public function contact(){
+        if(Cache::has('contact')) 
+        {
+            return Cache::get('contact'); 
+        }
         $title = $this->title;
         $description = $this->description;
         $keywords = $this->keywords;
         $title_posts_sidebar = 'Tin mới nhất';
         $posts_latest = DB::table('posts')->where(['status' => 1 ])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','create_at')->limit(5)->get();
-        return view('frontend.contact',compact('title','title_posts_sidebar','description','keywords','posts_latest'));
+        $view = view('frontend.contact',compact('title','title_posts_sidebar','description','keywords','posts_latest'))->render();
+        Cache::put('contact',$view,5);
+        return $view; 
     }
 
     public function menu($alias){
@@ -164,8 +198,14 @@ class PageController extends Controller
     }
 
     public function img_lib(){
+        if(Cache::has('img_lib')) 
+        {
+            return Cache::get('img_lib'); 
+        }
         $files = DB::table('img_lib')->select('name','image')->where(['status' => 1])->orderBy('order','desc')->orderBy('id','desc')->get();
-        return view('frontend.img_lib',compact('files'));
+        $view = view('frontend.img_lib',compact('files'))->render();
+        Cache::put('img_lib',$view,5);
+        return $view; 
     }
 
 }

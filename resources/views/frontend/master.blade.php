@@ -6,11 +6,11 @@
         <link rel="shortcut icon" href="profiles/demot402web4svn/uploads/logo/1417572140_favicon.htm">
         <!-- this styles only adds some repairs on idevices  -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>Rạp Sự Kiện Hải Dương</title>
-        <meta name="description" content="Dịch vụ thiết kế web trọn gói web4steps trực thuộc công ty phần mềm Nhân Hòa">
-        <meta name="keywords" content="Web thời trang, web4steps 3.0, kho giao diện, thiết kế web, web trọn gói, web giá rẻ, web nhân hòa">
+        <title>@if(isset($title)){{ ucwords($title) }}@endif</title>
+        <meta name="description" content="@if(isset($description)){{ $description }}@endif">
+        <meta name="keywords" content="@if(isset($keywords)){{ $keywords }}@endif">
         <!--Facebook-->
-        <link rel="image_src" href="demot402_web4s_default_22.html" / >
+        <link rel="image_src" href="{{ asset('/') }}" / >
         <meta property="og:title" content=""/>
         <meta property="og:description" content=""/>
         <meta property="og:url" content=""/>
