@@ -1,0 +1,1 @@
+[06-Oct-2016 06:58:07 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Auth\User' not found in /home/nid59c6d/public_html/app/User.php on line 8
