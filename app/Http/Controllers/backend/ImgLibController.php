@@ -11,6 +11,7 @@ use App\Http\Helpers\AdminHelper;
 use DB;
 use Validator;
 use Session;
+use Cache;
 
 class ImgLibController extends Controller
 {
@@ -31,6 +32,7 @@ class ImgLibController extends Controller
     }
 
     public function add_post(Request $req){
+        Cache::flush();
     	$validator = Validator::make($req->all(), [
             'image.*' => 'image|max:1000'
         ],[
@@ -69,6 +71,7 @@ class ImgLibController extends Controller
     }
 
     public function edit_post(Request $req,$id){
+        Cache::flush();
     	$validator = Validator::make($req->all(), [
             'image' => 'image|max:1000'
         ],[

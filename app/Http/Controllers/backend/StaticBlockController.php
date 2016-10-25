@@ -11,6 +11,7 @@ use App\Http\Helpers\AdminHelper;
 use DB;
 use Validator;
 use Session;
+use Cache;
 
 class StaticBlockController extends Controller
 {
@@ -31,7 +32,7 @@ class StaticBlockController extends Controller
     }
 
     public function add_post(Request $req){
-    	
+    	Cache::flush();
     	$data['name'] = $req->name;
     	$data['content'] = $req->content;
         $data['position'] = $req->position;
@@ -56,7 +57,7 @@ class StaticBlockController extends Controller
     }
 
     public function edit_post(Request $req,$id){
-    	
+    	Cache::flush();
 
         $index = DB::table($this->e['table'])->where('id',$id);
         

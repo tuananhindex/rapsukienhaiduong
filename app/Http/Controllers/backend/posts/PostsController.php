@@ -12,6 +12,7 @@ use DB;
 use Validator;
 use Session;
 use Input;
+use Cache;
 
 class PostsController extends Controller
 {
@@ -35,6 +36,7 @@ class PostsController extends Controller
     }
 
     public function add_post(Request $req){
+        Cache::flush();
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'alias' => 'required',
@@ -98,6 +100,7 @@ class PostsController extends Controller
     }
 
     public function edit_post(Request $req,$id){
+        Cache::flush();
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'alias' => 'required',
