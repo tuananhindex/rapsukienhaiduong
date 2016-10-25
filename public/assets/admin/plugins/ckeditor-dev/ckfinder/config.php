@@ -61,7 +61,7 @@ Examples:
 ATTENTION: The trailing slash is required.
 */
 // $baseUrl = "http://thegioicamxuc.vn/resources/upload/";
-$baseUrl = '/upload/admin/upload/ckfinder/';
+$baseUrl = 'http://localhost:8080/rapsukienhaiduong/public/upload/';
 /*
 $baseDir : the path to the local directory (in the server) which points to the
 above $baseUrl URL. This is the path used by CKFinder to handle the files in

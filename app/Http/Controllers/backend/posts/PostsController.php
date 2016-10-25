@@ -30,8 +30,8 @@ class PostsController extends Controller
         $this->e['action'] = 'Thêm';
         $cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
-
-        return view($this->e['view'].'.add',compact('cats','MultiLevelSelect'))->with(['e' => $this->e]);
+        $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
+        return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','posts'))->with(['e' => $this->e]);
     }
 
     public function add_post(Request $req){
@@ -92,8 +92,9 @@ class PostsController extends Controller
         $index = DB::table($this->e['table'])->where('id',$id)->first();
         $this->e['action'] = ucfirst($index->name);
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_catid);
+        $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
 
-        return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect'))->with(['e' => $this->e]);
+        return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','posts'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){

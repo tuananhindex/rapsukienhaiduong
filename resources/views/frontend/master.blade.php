@@ -236,7 +236,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                             <h1 class="logo">
                                                 <a title="" href="{{ route('home') }}">
-                                                <img alt="" style="max-width: 100%; max-height:100%" src="{{ asset('assets/frontend/img/logo.png') }}"/>
+                                                {!! Block::static_block(2) !!}
                                                 </a>     
                                             </h1>
                                         </div>
@@ -268,8 +268,7 @@
                                                     <figure class="hotline">
                                                         <i class="fa fa-phone"></i>
                                                         <figcaption class="hotline-inner">
-                                                            <p>GỌI CHÚNG TÔI NGAY</p>
-                                                            <span>0123 456 789</span> 
+                                                            {!! Block::static_block(1) !!}
                                                         </figcaption>
                                                     </figure>
                                                 </li>
@@ -340,13 +339,15 @@
                                                 {!! Block::menu_footer() !!}
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                                <section class="logo-footer"><img alt="" src="{{ asset('assets/frontend/img/logo.png') }}" /></section>
+                                                <section class="logo-footer">
+                                                    {!! Block::static_block(2) !!}
+                                                </section>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
                                 <section class="row-section footer-html  row_2" style='background:#282828 !important; padding:5px 0px !important; '>
-                                    
+                                    {!! Block::static_block(3) !!}
                                 </section>
                             </footer>
                         </div>

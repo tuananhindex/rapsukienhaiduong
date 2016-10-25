@@ -87,25 +87,14 @@
                                     {{ Auth::user()->name }}
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
+                           
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('backend.profile') }}" class="btn btn-default btn-flat">Thông Tin Tài Khoản</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('backend.logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ route('backend.logout') }}" class="btn btn-default btn-flat">Đăng Xuất</a>
                                 </div>
                             </li>
                         </ul>
@@ -381,7 +370,14 @@ var config = {
 // }
 
 $('select').chosen(config);
+$('.btn-add-link').click(function(){
+    var value = $('select.add_posts').val();
+    var res = value.split("hihihihi");
+    var arr = res[0].split('/');
+    var href = '/'+arr[3]+'/'+arr[4];
+    CKEDITOR.instances.content.insertHtml('<a href=\x22' + href + '\x22>'+ res[1] +'</a>');
 
+});
 </script>
 </body>
 </html>

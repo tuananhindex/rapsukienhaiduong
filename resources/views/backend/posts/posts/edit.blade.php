@@ -71,6 +71,18 @@
 						  
 						</div>
 
+						@if(count($posts) > 0)
+						<div class="form-group">
+						  	<label>Chèn bài viết vào nội dung</label>
+						  	<select class="add_posts form-control">
+						  		@foreach($posts as $val)
+						  			<option value="{{ route('posts',$val->alias) }}hihihihi{{ ucfirst($val->name) }}">{{ ucfirst($val->name) }}</option>
+						  		@endforeach
+							</select>
+							<input class="btn btn-primary btn-sm btn-add-link" style="margin: 5px 0" value="Chèn Link">
+						@endif  
+						</div>
+						
 						<div class="form-group">
 						  <label>Nội dung</label>
 						  <textarea class="form-control" name="content">{{ $index->content }}</textarea>

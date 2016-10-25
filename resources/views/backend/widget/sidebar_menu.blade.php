@@ -113,4 +113,17 @@
             <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.img_lib.list.get')) > 0) active @endif"><a href="{{ route('backend.img_lib.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
         </ul>
     </li>
+
+    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.static_block')) > 0) active @endif treeview">
+        <a href="#"><i class="fa fa-ban"></i> Block Tĩnh <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.static_block.add.get')) > 0) active @endif">
+                <a href="{{ route('backend.static_block.add.get') }}"><i class="fa fa-plus"></i> Thêm</a>
+                
+            </li>
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.static_block.list.get')) > 0) active @endif"><a href="{{ route('backend.static_block.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
+        </ul>
+    </li>
+
+    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.meta_default')) > 0) active @endif"><a href="{{ route('backend.meta_default.get') }}"><i class="fa fa-tags"></i> <span>Meta Mặc Định</span></a></li>
 </ul>

@@ -159,8 +159,31 @@ Route::group(['middleware' => ['web']], function () {
 				Route::get('delete/{id}',['as' => 'backend.img_lib.delete' , 'uses' => 'backend\ImgLibController@delete']);
 	    	});
 
+	    	Route::group(['prefix' => 'static_block'],function(){
+				Route::get('add',['as' => 'backend.static_block.add.get' , 'uses' => 'backend\StaticBlockController@add_get']);
+				Route::post('add',['as' => 'backend.static_block.add.post' , 'uses' => 'backend\StaticBlockController@add_post']);
+				Route::get('edit/{id}',['as' => 'backend.static_block.edit.get' , 'uses' => 'backend\StaticBlockController@edit_get']);
+				Route::post('edit/{id}',['as' => 'backend.static_block.edit.post' , 'uses' => 'backend\StaticBlockController@edit_post']);
+				Route::get('{key?}',['as' => 'backend.static_block.list.get' , 'uses' => 'backend\StaticBlockController@list_get']);
+				Route::post('/',['as' => 'backend.static_block.list.post' , 'uses' => 'backend\StaticBlockController@list_post']);
+				Route::get('delete/{id}',['as' => 'backend.static_block.delete' , 'uses' => 'backend\StaticBlockController@delete']);
+	    	});
+
+	    	Route::group(['prefix' => 'profile'],function(){
+				Route::get('/',['as' => 'backend.profile' , 'uses' => 'backend\ProfileController@index']);
+				Route::post('edit',['as' => 'backend.profile.edit' , 'uses' => 'backend\ProfileController@edit']);
+				Route::post('change_pw',['as' => 'backend.profile.change_pw' , 'uses' => 'backend\ProfileController@change_pw']);
+				Route::post('change_img',['as' => 'backend.profile.change_img' , 'uses' => 'backend\ProfileController@change_img']);
+				
+	    	});
+
+
+	    	Route::get('meta_default',['as' => 'backend.meta_default.get' , 'uses' => 'backend\MetaController@get']);
+	    	Route::post('meta_default',['as' => 'backend.meta_default.post' , 'uses' => 'backend\MetaController@post']);
+
 	    	Route::group(['prefix' => 'ajax'],function(){
 	    		Route::get('get_data_cursor',['as' => 'get_data_cursor' , 'uses' => 'backend\AjaxController@get_data_cursor']);
+
 	    	});
 	    });
     });

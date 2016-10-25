@@ -16,7 +16,7 @@ use Cache;
 
 class PageController extends Controller
 {
-    public $title = 'Rạp Sự Kiện Hải Dương';
+    public $title = '';
     public $description = '';
     public $keywords = '';
     public $product_category_all = '';
@@ -31,7 +31,12 @@ class PageController extends Controller
             $menus = DB::table('menu')->select('id','name','alias','cursor','fk_parentid')->where(['status' => 1 , 'menu_header' => 1])->orderBy('order','desc')->get();
             Cache::put('menus',$menus,60); //Cho tất cả các FAQ vào bộ nhớ cache
         }
-        
+        $meta_default = DB::table('meta_default')->first();
+        if(isset($meta_default)){
+            $this->title = $meta_default->title;
+            $this->description = $meta_default->description;
+            $this->keywords = $meta_default->keywords;
+        }
         View::share('menus',$menus);
     }
 

@@ -148,4 +148,9 @@ class BlockController extends Controller
         
         return view('frontend.block.menu_footer',compact('data'));
     }
+
+    public static function static_block($pos){
+        $data = DB::table('static_block')->where(['position' => $pos ,'status' => 1])->select('content')->first();
+        return $data->content;
+    }
 }
