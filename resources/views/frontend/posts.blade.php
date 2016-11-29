@@ -37,7 +37,8 @@
                                         <p>
                                             {!! $index->content !!}                       
                                         </p>
-                                        
+
+                                        {!! Block::tags($index->tags) !!}
                                     </ul>
                                     
                                        

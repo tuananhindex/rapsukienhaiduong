@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('tim-kiem',['as' => 'search.post' , 'uses' => 'frontend\PageController@search_post']);
 	Route::get('tim-kiem/{key}',['as' => 'search.get' , 'uses' => 'frontend\PageController@search_get']);
+	Route::get('tu-khoa/{key}',['as' => 'tag' , 'uses' => 'frontend\PageController@tag']);
 
 	Route::get('menu/{alias}',['as' => 'menu' , 'uses' => 'frontend\PageController@menu']);
 	
@@ -167,6 +168,16 @@ Route::group(['middleware' => ['web']], function () {
 				Route::get('{key?}',['as' => 'backend.static_block.list.get' , 'uses' => 'backend\StaticBlockController@list_get']);
 				Route::post('/',['as' => 'backend.static_block.list.post' , 'uses' => 'backend\StaticBlockController@list_post']);
 				Route::get('delete/{id}',['as' => 'backend.static_block.delete' , 'uses' => 'backend\StaticBlockController@delete']);
+	    	});
+
+	    	Route::group(['prefix' => 'tag'],function(){
+				Route::get('add',['as' => 'backend.tag.add.get' , 'uses' => 'backend\TagController@add_get']);
+				Route::post('add',['as' => 'backend.tag.add.post' , 'uses' => 'backend\TagController@add_post']);
+				Route::get('edit/{id}',['as' => 'backend.tag.edit.get' , 'uses' => 'backend\TagController@edit_get']);
+				Route::post('edit/{id}',['as' => 'backend.tag.edit.post' , 'uses' => 'backend\TagController@edit_post']);
+				Route::get('{key?}',['as' => 'backend.tag.list.get' , 'uses' => 'backend\TagController@list_get']);
+				Route::post('/',['as' => 'backend.tag.list.post' , 'uses' => 'backend\TagController@list_post']);
+				Route::get('delete/{id}',['as' => 'backend.tag.delete' , 'uses' => 'backend\TagController@delete']);
 	    	});
 
 	    	Route::group(['prefix' => 'profile'],function(){

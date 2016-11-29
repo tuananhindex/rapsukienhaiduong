@@ -150,6 +150,8 @@ class PageController extends Controller
     public function search_get($key){
        
         $title = $this->title;
+        $description = $this->description;
+        $keywords = $this->keywords;
         $title_posts_sidebar = 'Tin mới nhất';
         $posts_sidebar = DB::table('posts')->where(['status' => 1 ])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','create_at')->limit(5)->get();
         $posts = DB::table('posts')->where('name','like',"%$key%")->orWhere('description','like',"%$key%")->where('status',1)->orderBy('order','desc')->orderBy('id','desc')->select('id','name','alias','image','description','create_at')->paginate(10);
@@ -200,6 +202,18 @@ class PageController extends Controller
         }
         return redirect()->route($route,$index->cursor_id);
         
+    }
+
+    public function tag($key){
+        $title = $this->title;
+        $description = $this->description;
+        $keywords = $this->keywords;
+        $title_posts_sidebar = 'Tin mới nhất';
+        $posts_sidebar = DB::table('posts')->where(['status' => 1 ])->orderBy('order','desc')->orderBy('id','desc')->select('name','image','alias','create_at')->limit(5)->get();
+
+        $name = DB::table('tag')->where('alias',$key)->select('name')->first()->name;
+        $posts = DB::table('posts')->where('tags','like',"%$key%")->where('status',1)->orderBy('order','desc')->orderBy('id','desc')->select('id','name','alias','image','description','create_at')->paginate(10);
+        return view('frontend.tag',compact('name','title','title_posts_sidebar','posts_sidebar','posts'));
     }
 
     public function img_lib(){

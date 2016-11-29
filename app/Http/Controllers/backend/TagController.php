@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend\posts;
+namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 
@@ -13,14 +13,13 @@ use Validator;
 use Session;
 use Cache;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
 	private $e = [
-					'view' => 'backend.posts.category',
-					'route' => 'backend.posts.category',
-                    'frontend_route' => 'posts.category',
-					'module' => 'danh mục bài viết',
-					'table' => 'posts_category'
+					'view' => 'backend.tag',
+					'route' => 'backend.tag',
+					'module' => 'Tags',
+					'table' => 'tag'
 				];
 	public function __construct(){
 		View::share('e',$this->e);
@@ -28,25 +27,19 @@ class CategoryController extends Controller
 
     public function add_get(){
     	$this->e['action'] = 'Thêm';
-    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->get();
-    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
-        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
+    	
 
-    	return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','tags'))->with(['e' => $this->e]);
+    	return view($this->e['view'].'.add')->with(['e' => $this->e]);
     }
 
     public function add_post(Request $req){
         Cache::flush();
-        //return dd($req->all());
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required',
-            'image' => 'image|max:1000'
+            'alias' => 'required'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
-        	'image.image' => 'File tải lên phải là ảnh',
-        	'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
+        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo'
         ]);
         $error = $validator->errors()->first();
         if($error){
@@ -57,22 +50,7 @@ class CategoryController extends Controller
     	$data['name'] = $req->name;
     	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias);
 
-    	if($req->file('image')){
-    		$image = $req->file('image');
-	    	$image_name = time().'.'.$image->getClientOriginalExtension();
-	    	$image->move('upload',$image_name);
-	    	$data['image'] = 'upload/'.$image_name;
-    	}
     	
-        $data['tags'] = implode(',',$req->tags);
-        $data['fk_parentid'] = $req->fk_parentid;
-    	$data['order'] = $req->order;
-    	$data['description'] = $req->description;
-        $data['pos_home'] = $req->pos_home;
-        $data['pos_footer'] = $req->pos_footer;
-    	$data['meta_title'] = $req->meta_title;
-    	$data['meta_description'] = $req->meta_description;
-    	$data['meta_keywords'] = $req->meta_keywords;
     	$data['status'] = $req->status;
     	$data['create_at'] = date('Y-m-d H:i:s');
     	
@@ -87,26 +65,20 @@ class CategoryController extends Controller
 
     public function edit_get($id){
     	
-    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->whereNotIn('id',[$id])->get();
+    	
     	$index = DB::table($this->e['table'])->where('id',$id)->first();
     	$this->e['action'] = ucfirst($index->name);
-    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_parentid);
-        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
-
-    	return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','tags'))->with(['e' => $this->e]);
+    	
+    	return view($this->e['view'].'.edit',compact('index'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){
         Cache::flush();
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required',
-            'image' => 'image|max:1000'
-        ],[
+            'alias' => 'required'],[
         	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
-        	'image.image' => 'File tải lên phải là ảnh',
-        	'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
+        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo'
         ]);
         $error = $validator->errors()->first();
         if($error){
@@ -120,25 +92,7 @@ class CategoryController extends Controller
     	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias,$index->first()->id);
 
     	
-    	if($req->file('image')){
-    		if(file_exists($index->first()->image)){
-	    		unlink($index->first()->image);
-	    	}
-    		$image = $req->file('image');
-	    	$image_name = time().'.'.$image->getClientOriginalExtension();
-	    	$image->move('upload',$image_name);
-	    	$data['image'] = 'upload/'.$image_name;
-    	}
-
-        $data['tags'] = implode(',',$req->tags);
-    	$data['fk_parentid'] = $req->fk_parentid;
-    	$data['order'] = $req->order;
-    	$data['description'] = $req->description;
-        $data['pos_home'] = $req->pos_home;
-        $data['pos_footer'] = $req->pos_footer;
-    	$data['meta_title'] = $req->meta_title;
-    	$data['meta_description'] = $req->meta_description;
-    	$data['meta_keywords'] = $req->meta_keywords;
+    	
     	$data['status'] = $req->status;
     	$data['update_at'] = date('Y-m-d H:i:s');
     	
@@ -153,7 +107,7 @@ class CategoryController extends Controller
 
     public function list_get($key = ''){
     	$this->e['action'] = 'Danh Sách';
-    	$data = DB::table($this->e['table'])->orderBy('order','desc')->orderBy('id','desc');
+    	$data = DB::table($this->e['table'])->orderBy('id','desc');
         if(!empty($key)){
             $data = $data->where('name','like','%'.$key.'%');
         }
@@ -179,7 +133,7 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
-        // DB::table($this->e['table'])->where('id',$id)->delete();
+    	// DB::table($this->e['table'])->where('id',$id)->delete();
      //    return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
         return redirect()->back();
     }

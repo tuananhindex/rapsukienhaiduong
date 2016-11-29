@@ -95,6 +95,16 @@
 						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,...">
 						</div>
 						<div class="form-group">
+							<label>Tags</label>
+							<select data-placeholder="Tags" multiple class="form-control chosen-select" tabindex="8" name="tags[]">
+								@if(isset($tags) && count($tags) > 0)
+								@foreach($tags as $val)
+					            <option value="{{ $val->alias }}">{{ $val->name }}</option>
+					            @endforeach
+					            @endif
+		                    </select>
+	                    </div>
+						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
 								<option value="1">Hiển Thị</option>

@@ -125,5 +125,16 @@
         </ul>
     </li>
 
+    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.tag')) > 0) active @endif treeview">
+        <a href="#"><i class="fa fa-tags"></i> Tags <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.tag.add.get')) > 0) active @endif">
+                <a href="{{ route('backend.tag.add.get') }}"><i class="fa fa-plus"></i> Thêm</a>
+                
+            </li>
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.tag.list.get')) > 0) active @endif"><a href="{{ route('backend.tag.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
+        </ul>
+    </li>
+
     <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.meta_default')) > 0) active @endif"><a href="{{ route('backend.meta_default.get') }}"><i class="fa fa-tags"></i> <span>Meta Mặc Định</span></a></li>
 </ul>

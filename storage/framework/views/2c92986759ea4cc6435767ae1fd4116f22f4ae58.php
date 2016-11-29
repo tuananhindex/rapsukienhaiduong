@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="des-product">
-                                    <a href="<?php echo e(route('posts.category',$val->alias)); ?>" title="<?php echo e($val->name); ?>">
+                                    <a href="<?php echo e(route('posts',$val->alias)); ?>" title="<?php echo e($val->name); ?>">
                                         <h3><?php echo e($val->name); ?></h3>
                                     </a>
                                     <p><?php echo e($val->description); ?>.</p>

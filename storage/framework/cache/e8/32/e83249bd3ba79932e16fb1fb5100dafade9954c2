@@ -1,0 +1,857 @@
+1479402074s:60071:"<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Favicon --> 
+        <link rel="shortcut icon" href="profiles/demot402web4svn/uploads/logo/1417572140_favicon.htm">
+        <!-- this styles only adds some repairs on idevices  -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Rạp Sự Kiện Hải Dương</title>
+        <meta name="description" content="Rạp Sự Kiện Hải Dương">
+        <meta name="keywords" content="Rạp Sự Kiện Hải Dương">
+        <!--Facebook-->
+        <link rel="image_src" href="http://localhost:2008/rapsukienhaiduong/public/" / >
+        <meta property="og:title" content=""/>
+        <meta property="og:description" content=""/>
+        <meta property="og:url" content=""/>
+        <meta property="og:image" content=""/>
+        <meta property="og:type" content="site"/>
+        <meta property="og:site_name" content=""/>
+        <!--end facebook-->
+        <!-- Bootstrap -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/admin/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Style -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/reset.css" rel="stylesheet">
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/style.css" rel="stylesheet">
+        <!-- Style Responsive -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/style-responsive.css" rel="stylesheet" >
+        <!-- owl Slider -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/slider.css" rel="stylesheet">
+        <!-- SLIDER REVOLUTION Main Slider -->
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/captions.htm" rel="stylesheet">
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/settings.htm" rel="stylesheet">
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/magnific-popup.css" rel="stylesheet">
+        <link href="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/css/custom.css" rel="stylesheet">
+        <!-- Load jQuery Library -->
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/jquery-1.11.min.js"></script>
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/owl.carousel.js"></script>
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/jquery.validate.js"></script>
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/bootstrap.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    <body>
+        <div id="st-container" class="st-container">
+            <div class="st-pusher">
+                <nav class="st-menu st-effect-3" id="cssmenu-st">
+                    <div class="list-group panel">
+                        <a href="http://localhost:2008/rapsukienhaiduong/public" target="_self" class="list-group-item-stmenu">
+                        Trang chủ                </a> 
+                        <!--nếu có sub-->
+                        <a href="http://localhost:2008/rapsukienhaiduong/public/menu/gioi-thieu-don-vi" target="_self" class="list-group-item-stmenu">giới thiệu đơn vị                </a> <div class="collapse" id="menu_12"></div><a href="http://localhost:2008/rapsukienhaiduong/public/menu/dich-vu" target="_self" class="list-group-item-stmenu">dịch vụ                </a> <div class="collapse" id="menu_7"></div><a href="http://localhost:2008/rapsukienhaiduong/public/menu/tin-tuc" target="_self" class="list-group-item-stmenu">tin tức                </a> <div class="collapse" id="menu_9"></div>
+                        <!--end nếu có sub-->
+                        <a href="http://localhost:2008/rapsukienhaiduong/public/thu-vien-anh" target="_self" class="list-group-item-stmenu">
+                        Thư viện ảnh         </a> 
+                        <a href="http://localhost:2008/rapsukienhaiduong/public/lien-he" target="_self" class="list-group-item-stmenu">
+                        Liên hệ                </a> 
+                        <!--nếu có sub-->
+                        <!--end nếu có sub-->
+                    </div>
+                </nav>
+                <!-------Menu reponsive--->
+                <div class="st-content">
+                    <!-- this is the wrapper for the content -->
+                    <div class="st-content-inner">
+                        <div class="main clearfix">
+                            <!--begin top-->
+                            <!--icon menu su dụng trong giao diện mobile-->
+                            <div id="st-trigger-effects" class="column hidden-lg hidden-md">
+                                <button data-effect="st-effect-3">
+                                <i class="fa fa-bars fa-lg"></i>
+                                </button>
+                            </div>
+                            <!--icon menu su dụng trong giao diện mobile-->
+                            <section id="topheader">
+                                <section id="topbar">
+                                    <div class="container">
+                                        <div class="row">
+                                            <!-- start col -->
+                                            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                                                <div class="currency pull-left">
+                                                    <form>
+                                                        <div class="btn-group">
+                                                            <!-- <span class="btn dropdown-toggle" data-toggle="dropdown"> 
+                                                                <a href="demot402_web4s_default_22.html#"> 
+                                                                    <span>đ</span> 
+                                                                    <span>Tiền tệ</span> 
+                                                                    <i class="fa fa-angle-down"></i>
+                                                                </a>
+                                                                </span> -->
+                                                            <!-- Show Dropdown Menu -->
+                                                            
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!--start popup login modal fade -->
+                                            <div class="zoom-anim-dialog mfp-hide" id="login">
+                                                <div class="popup-body">
+                                                    <h4 class="modal-title" id="myModalLabel">Đăng nhập</h4>
+                                                    <section class="social-login">
+                                                        <p>Đăng nhập qua mạng xã hội</p>
+                                                        <div id="fb-login-btn"></div>
+                                                        <script>
+                                                            $(document).ready(function(){
+                                                                var _LinkFB = 'http://demot402.web4s.vn/?site=load_ajax&type=fb_login';
+                                                                $.ajax({
+                                                                     method: "POST",
+                                                                     url: _LinkFB,
+                                                                     data: {id: "hello"}
+                                                                })
+                                                                .done(function( data ) {
+                                                                    $("#fb-login-btn").html(data);
+                                                                })
+                                                            })
+                                                        </script>
+                                                    </section>
+                                                    <form action="demot402_web4s_default_22.html#" method="post">
+                                                        <div class="reg_form_desc">
+                                                            Đăng nhập qua email                                                
+                                                        </div>
+                                                        <div class="noti-error login_notify" style="display:none"></div>
+                                                        <input type="text" placeholder="Email đăng nhập" class="login" name="user_name" id="login_user_name">
+                                                        <input type="password" placeholder="Mật khẩu" class="login" name="user_pass" id="login_user_pass">
+                                                        <div class="block">
+                                                            <input type="button" class="submit_login" value="Đăng nhập" onClick="customer_login('http://demot402.web4s.vn/?site=login&view=check_login');">
+                                                            <section class="regis">
+                                                                <a class='regislink' href="quen-mat-khau.html" class="lostpass">Quên mật khẩu ?</a> 
+                                                                <a class='regislink' href="dang-ky-thanh-vien.html" class="lostpass">Tạo tài khoản</a>
+                                                                <a class="regislink shipping_register"  href="demot402_web4s_default_22.html#news_pop_create_new_customer" id="new_customer_common"  style="display:none" id="shipping_register"></a><!--use for paging shipping method-->
+                                                            </section>
+                                                            <!--a href="#" class="lostpass">Quên mật khẩu ?</a-->
+                                                        </div>
+                                                    </form>
+                                                    <Script language="javascript">
+                                                        function customer_login(url)
+                                                        {
+                                                            var login_user_name=jQuery('#login_user_name').val();
+                                                            var login_user_pass=jQuery('#login_user_pass').val();
+                                                            jQuery(".login_notify").show();
+                                                            if(login_user_name.length=="" || login_user_pass.length==""){
+                                                                    jQuery(".login_notify").html('Tài khoản và mật khẩu không được bỏ trống');
+                                                            }else{                                              
+                                                                    jQuery(".login_notify").html('Loading..');               
+                                                        
+                                                                    jQuery.post(url, {user_name:login_user_name, user_pass: login_user_pass}).done(function( data ) {
+                                                        
+                                                                    if(data==1)
+                                                                    {
+                                                                    jQuery(".login_notify").html('Không tìm thấy tên đăng nhập trong hệ thống');
+                                                                    }
+                                                                    else if(data==2)
+                                                                    {
+                                                                    jQuery(".login_notify").html('Mật khẩu không đúng');             
+                                                                    }
+                                                                    else if(data==3)
+                                                                    {
+                                                                    jQuery(".login_notify").html('Tài khoản của bạn đã bị khóa');        
+                                                                    }
+                                                                    else{
+                                                                    //login success
+                                                                    jQuery(".login_notify").html('Đăng nhập thành công');
+                                                        
+                                                                    window.setTimeout('location.reload()', 1000);
+                                                                    }
+                                                            })
+                                                            }
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                            <script src="assets/frontend/js/jquery.magnific-popup.min.js"></script>
+                                            <!--Don't move the js file above-->
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('.popup-with-zoom-anim').magnificPopup({
+                                                        type: 'inline',
+                                                
+                                                        fixedContentPos: false,
+                                                        fixedBgPos: true,
+                                                
+                                                        overflowY: 'auto',
+                                                
+                                                        closeBtnInside: true,
+                                                        preloader: false,
+                                                        
+                                                        midClick: true,
+                                                        removalDelay: 300,
+                                                        mainClass: 'my-mfp-zoom-in'
+                                                        ,callbacks: {
+                                                            close: function() {
+                                                                $('body').css('overflow-y','');
+                                                            },
+                                                            open: function (){
+                                                                $('body').css('overflow-y','scroll');
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                            <!--end popup login-->
+                                            <!-- end col -->
+                                            <!-- start col -->
+                                            <!-- end col -->
+                                            <!-- start col -->
+                                            <div class="show-mobile hidden-lg hidden-md pull-right">
+                                                <!-- start quick-user -->
+                                                <!-- end quick-user -->
+                                                <!-- start quick-access -->
+                                                <div class="quick-access pull-left">
+                                                </div>
+                                                <!-- end quick-access -->
+                                                <!-- start quick-access -->
+                                                <div class="quick-access pull-left">
+                                                    <div class="quickaccess-toggle"> 
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                <!-- end quick-access -->
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>
+                            <section class="row-section top-logo top-html " style='  '>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <h1 class="logo">
+                                                <a title="" href="http://localhost:2008/rapsukienhaiduong/public">
+                                                <p><img alt="" src="http://rapsukienhaiduong.com/upload/images/logo.png" style="height:50px; width:510px" /></p>
+
+                                                </a>     
+                                            </h1>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <!--module width > 3.5-->
+                                            <form action="http://localhost:2008/rapsukienhaiduong/public/tim-kiem" method="post" class="custom_form ">
+                                                <section class="reservation">
+                                                    <div class="reservation-inner">
+                                                        <div class="row">
+                                                            <input type="hidden" name="_token" value="AqFEJB0hujmdp17Z2JxN9WP4orpuEDpUSeIjBAWN">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="label_text label_text_ho">Họ</label>
+                                                                <input minlength="3" class="form_1_input_ho" name="key" type="text" placeholder="Bạn muốn tìm gì ?" value="" >
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label></label>
+                                                                <input type="submit" class="btn fa-input" value="Tìm kiếm">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </form>
+                                            <!--module width < 3.5-->
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <ul class="hotline-book">
+                                                <li>
+                                                    <figure class="hotline">
+                                                        <i class="fa fa-phone"></i>
+                                                        <figcaption class="hotline-inner">
+                                                            <p>GỌI CH&Uacute;NG T&Ocirc;I NGAY</p>
+
+<p><span style="font-size:20px"><span style="color:#00a885">0912 722 093</span></span></p>
+
+                                                        </figcaption>
+                                                    </figure>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="row-section top-menu " style='  '>
+                                <div class="container">
+                                    <div class="hidden-sm hidden-xs">
+                                        <nav id="nav">
+                                            <ul class="nav navbar-nav">
+                                                <li><a level='1' href="http://localhost:2008/rapsukienhaiduong/public" target="_self"> Trang chủ</a></li>
+                                                <li><a tabindex="-1" href="http://localhost:2008/rapsukienhaiduong/public/menu/gioi-thieu-don-vi" target="_self"> giới thiệu đơn vị</a><ul class="dropdown-menu"></ul></li><li><a tabindex="-1" href="http://localhost:2008/rapsukienhaiduong/public/menu/dich-vu" target="_self"> dịch vụ</a><ul class="dropdown-menu"></ul></li><li><a tabindex="-1" href="http://localhost:2008/rapsukienhaiduong/public/menu/tin-tuc" target="_self"> tin tức</a><ul class="dropdown-menu"></ul></li>
+                                                <!-- <li><a level='1' href="demot402_web4s_default_2.html" target="_self"> Giới thiệu</a></li>
+                                                <li class="dropdown">
+                                                    <a level='1' href="demot402_web4s_default_42.html" target="_self" class="dropdown-toggle" data-toggle="">Tour trong nước                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-submenu">
+                                                            <a tabindex="-1" href="demot402_web4s_default_4.html" target="_self"><i class="fa fa-plane"></i> Du lịch miền Nam</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a tabindex="-1" href="demot402_web4s_default_5.html" target="_self"> <i class="fa fa-plane"></i>Du lịch miền Tây</a> </li>
+                                                                <li><a tabindex="-1" href="demot402_web4s_default_7.html" target="_self"> <i class="fa fa-plane"></i>Du lich An Giang</a> </li>
+                                                                <li><a tabindex="-1" href="demot402_web4s_default_6.html" target="_self"> <i class="fa fa-plane"></i>Du lịch Tiền Giang</a> </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="demot402_web4s_default_8.html" target="_self"> <i class="fa fa-plane"></i>Du lịch miền Bắc</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a level='1' href="demot402_web4s_default_10.html" target="_self" class="dropdown-toggle" data-toggle="">Tour quốc tế                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="demot402_web4s_default_9.html" target="_self"> <i class="fa fa-plane"></i>Du lịch Hàn Quốc</a></li>
+                                                        <li><a href="demot402_web4s_default_11.html" target="_self"> <i class="fa fa-plane"></i>Du lịch Châu Âu</a></li>
+                                                        <li><a href="demot402_web4s_default_12.html" target="_self"> <i class="fa fa-plane"></i>Du lịch Trung Đông</a></li>
+                                                        <li><a href="demot402_web4s_default_15.html" target="_self"> <i class="fa fa-plane"></i>Du lịch Tây Ban Nha</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a level='1' href="demot402_web4s_default_13.html" target="_self"> Easy Tour</a></li>
+                                                <li><a level='1' href="demot402_web4s_default_14.html" target="_self"> Khuyến mãi</a></li> -->
+                                                <li><a href="http://localhost:2008/rapsukienhaiduong/public/thu-vien-anh" target="_self" >Thư viện ảnh</a></li>
+                                                <li><a level='1' href="http://localhost:2008/rapsukienhaiduong/public/lien-he" target="_self"> Liên hệ</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function(){
+                                            var url=document.URL;
+                                            
+                                            $("a[href='"+url+"'][level='"+1+"']").addClass('active');
+                                        }); 
+                                    </script>
+                                </div>
+                            </section>
+                            
+                            <!--end top-->  
+                            <section class="row-section top-slideshow " style='  '><!-----Slider------>
+        
+     
+        <div id="myCarousel_2246831477164088" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          
+          <div class="carousel-inner">
+          
+                                                                  <div class="item  active ">
+                    <a href="javascript:void(0)"> 
+                      <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477280552.jpg" alt="">
+                    </a>
+                    </div>
+          
+                                                                  <div class="item ">
+                    <a href="javascript:void(0)"> 
+                      <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477280540.jpg" alt="">
+                    </a>
+                    </div>
+          
+                                                                  <div class="item ">
+                    <a href="javascript:void(0)"> 
+                      <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477280527.jpg" alt="">
+                    </a>
+                    </div>
+          
+                                                                  <div class="item ">
+                    <a href="javascript:void(0)"> 
+                      <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477280516.jpg" alt="">
+                    </a>
+                    </div>
+          
+                   
+          </div>                                                                
+          <a class="left carousel-control" href="#myCarousel_2246831477164088" role="button" data-slide="prev"><img src="assets/frontend/img/left.png" alt=""></a>
+          <a class="right carousel-control" href="#myCarousel_2246831477164088" role="button" data-slide="next"><img src="assets/frontend/img/right.png" alt=""></i></a>
+        </div><!-- /.carousel -->
+        <script>
+          //script de chạy slide
+          $(document).ready(function() {
+            var owl = $("#slide_2246831477164088");
+            owl.owlCarousel({
+              items : 6,//man hinh rong
+              itemsDesktop : [1000,4],//desktop
+              itemsDesktopSmall : [900,3],//table ngang
+              itemsTablet: [600,2],//
+              itemsMobile : false
+          });
+          // Custom Navigation Events
+          $(".next_2246831477164088").click(function(){
+            owl.trigger('owl.next');
+            })
+            $(".prev_2246831477164088").click(function(){
+            owl.trigger('owl.prev');
+            })     
+          });
+        </script>
+                
+  
+</section> 
+ 
+                            
+<section class="row-section top-product_latest " style='  '>
+    <div class="container">
+        <Script language="javascript">
+            <!--
+                $(document).ready(function() {
+                var owl26938473211476776202 = $('#xxxxxxxxxxxx-26938473211476776202');
+                owl26938473211476776202.owlCarousel({
+                    items : 4, 
+                  itemsDesktop : [1024,3], 
+                  itemsDesktopSmall : [960,3],
+                  itemsTablet: [640,2],
+                  itemsMobile: [480,2],
+                });
+                $("#next26938473211476776202").click(function(){
+                    
+                    owl26938473211476776202.trigger('owl.next');
+                  })
+                  $("#prev26938473211476776202").click(function(){
+                    
+                    owl26938473211476776202.trigger('owl.prev');
+                  })         
+                });
+                -->
+        </script>
+        <section id="products-featured" >
+            <div class="itemfeatured">
+                <h2><span>Dịch Vụ Của Chúng Tôi</span></h2>
+                <div class="row">
+                    <!-- Navigation -->
+                    <div class="featuredNavigation">
+                        <a class="prev" title="Prev" id="prev26938473211476776202"><i class="fa fa-arrow-circle-o-left"></i></a>
+                        <a class="next" title="Next" id="next26938473211476776202"><i class="fa fa-arrow-circle-o-right"></i></a>
+                    </div>
+                    <!-- Products -->
+                    <div id="xxxxxxxxxxxx-26938473211476776202" class="owl-carousel" >
+                        <!-- Products 1-->
+                        
+                                                <div class="col124 item col-lg-12">
+                            <div class="product">
+                                <div class="image">
+                                    <div class="img-overflow">
+                                        <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-nhale-gia-tien-theo-tung-chu-de-va-tong-mau" title="Trang tr&iacute; nh&agrave; - lễ gia ti&ecirc;n theo từng chủ để v&agrave; t&ocirc;ng m&agrave;u">
+                                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477170825.jpg" alt="">
+                                        </a>
+                                        <div class="ImageOverlayBe"></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="des-product">
+                                    <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-nhale-gia-tien-theo-tung-chu-de-va-tong-mau" title="Trang tr&iacute; nh&agrave; - lễ gia ti&ecirc;n theo từng chủ để v&agrave; t&ocirc;ng m&agrave;u">
+                                        <h3>Trang tr&iacute; nh&agrave; - lễ gia ti&ecirc;n theo từng chủ để v&agrave; t&ocirc;ng m&agrave;u</h3>
+                                    </a>
+                                    <p>Trang tr&iacute; nh&agrave; - trang tr&iacute; lễ gia ti&ecirc;n cho lễ cưới hỏi l&agrave; nhu cầu kh&ocirc;ng thể thiếu v&agrave; bắt buộc của người Việt từ xưa cho đến nay. Ng&agrave;y xưa th&igrave; việc trang tr&iacute; nh&agrave; cửa được l&agrave;m theo....</p>
+                                    <!-- <div class="price">
+                                        <span class="price-new">3.990.000đ</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="col124 item col-lg-12">
+                            <div class="product">
+                                <div class="image">
+                                    <div class="img-overflow">
+                                        <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/cho-thue-ao-dai-bung-qua-danh-cho-dau-phu-re-phu-trong-ngay-cuoi" title="Cho thu&ecirc; &aacute;o d&agrave;i bưng quả d&agrave;nh cho d&acirc;u phụ, rễ phụ trong ng&agrave;y cưới">
+                                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477170761.jpg" alt="">
+                                        </a>
+                                        <div class="ImageOverlayBe"></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="des-product">
+                                    <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/cho-thue-ao-dai-bung-qua-danh-cho-dau-phu-re-phu-trong-ngay-cuoi" title="Cho thu&ecirc; &aacute;o d&agrave;i bưng quả d&agrave;nh cho d&acirc;u phụ, rễ phụ trong ng&agrave;y cưới">
+                                        <h3>Cho thu&ecirc; &aacute;o d&agrave;i bưng quả d&agrave;nh cho d&acirc;u phụ, rễ phụ trong ng&agrave;y cưới</h3>
+                                    </a>
+                                    <p>Chiếc &aacute;o d&agrave;i đẹp l&agrave; chiếc &aacute;o d&agrave;i c&oacute; thể t&ocirc;n l&ecirc;n v&oacute;c d&aacute;ng, l&agrave;n da của người mặc, Honey Bees ch&uacute; trọng từng chi tiết tr&ecirc;n &aacute;o từ form d&aacute;ng, kiểu &aacute;o d&agrave;i nam c&aacute;ch t&acirc;n c&oacute; đường viền....</p>
+                                    <!-- <div class="price">
+                                        <span class="price-new">3.990.000đ</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="col124 item col-lg-12">
+                            <div class="product">
+                                <div class="image">
+                                    <div class="img-overflow">
+                                        <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-le-vu-quy-theo-phong-cach-moc-mac" title="Trang tr&iacute; lễ vu quy theo phong c&aacute;ch mộc mạc">
+                                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477170373.jpg" alt="">
+                                        </a>
+                                        <div class="ImageOverlayBe"></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="des-product">
+                                    <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-le-vu-quy-theo-phong-cach-moc-mac" title="Trang tr&iacute; lễ vu quy theo phong c&aacute;ch mộc mạc">
+                                        <h3>Trang tr&iacute; lễ vu quy theo phong c&aacute;ch mộc mạc</h3>
+                                    </a>
+                                    <p>Cưới hỏi - chuyện hệ trọng của đời người n&ecirc;n ai cũng muốn thật chu to&agrave;n v&agrave; ho&agrave;n mỹ tất cả mọi mặt từ trang ho&agrave;ng nh&agrave; cửa, nh&agrave; trai sẽ chuẩn bị lễ vật g&igrave;, trang điểm c&ocirc; d&acirc;u ở....</p>
+                                    <!-- <div class="price">
+                                        <span class="price-new">3.990.000đ</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="col124 item col-lg-12">
+                            <div class="product">
+                                <div class="image">
+                                    <div class="img-overflow">
+                                        <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-le-dinh-hon-dam-chat-truyen-thong-voi-hoa-sen-hong" title="Trang tr&iacute; lễ đ&iacute;nh h&ocirc;n đậm chất truyền thống với hoa sen hồng">
+                                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477170456.jpg" alt="">
+                                        </a>
+                                        <div class="ImageOverlayBe"></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="des-product">
+                                    <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/trang-tri-le-dinh-hon-dam-chat-truyen-thong-voi-hoa-sen-hong" title="Trang tr&iacute; lễ đ&iacute;nh h&ocirc;n đậm chất truyền thống với hoa sen hồng">
+                                        <h3>Trang tr&iacute; lễ đ&iacute;nh h&ocirc;n đậm chất truyền thống với hoa sen hồng</h3>
+                                    </a>
+                                    <p>Với mong muốn trang tr&iacute; lễ đ&iacute;nh h&ocirc;n cho con g&aacute;i của m&igrave;nh với m&agrave;u sắc v&agrave; hoa mang đậm n&eacute;t truyền thồng n&ecirc;n Mẹ c&ocirc; d&acirc;u đ&atilde; chọn hoa sen hồng l&agrave; loại hoa chủ đạo trong trang tr&iacute; lễ....</p>
+                                    <!-- <div class="price">
+                                        <span class="price-new">3.990.000đ</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="col124 item col-lg-12">
+                            <div class="product">
+                                <div class="image">
+                                    <div class="img-overflow">
+                                        <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/kieu-dang-mau-sac-da-dang-cong-hoa-tuoi-trong-dam-cuoi" title="Kiểu d&aacute;ng, m&agrave;u sắc đa dạng cổng hoa tươi trong đ&aacute;m cưới">
+                                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477170034.jpg" alt="">
+                                        </a>
+                                        <div class="ImageOverlayBe"></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="des-product">
+                                    <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/kieu-dang-mau-sac-da-dang-cong-hoa-tuoi-trong-dam-cuoi" title="Kiểu d&aacute;ng, m&agrave;u sắc đa dạng cổng hoa tươi trong đ&aacute;m cưới">
+                                        <h3>Kiểu d&aacute;ng, m&agrave;u sắc đa dạng cổng hoa tươi trong đ&aacute;m cưới</h3>
+                                    </a>
+                                    <p>Đ&aacute;m cưới người Việt xưa v&agrave; nay đều rất ch&uacute; trọng về nghi lễ v&agrave; h&igrave;nh thức b&ecirc;n ngo&agrave;i. Trong ng&agrave;y cưới th&igrave; trước nh&agrave; l&uacute;c n&agrave;o cũng phải c&oacute; cổng hoa cưới.</p>
+                                    <!-- <div class="price">
+                                        <span class="price-new">3.990.000đ</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                                                
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+<div class="main-wrap">
+    <section class="row_section" style='  '>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div>
+                        <!--$css_item,$box_width,$position,$num_item_row -->
+                                        <section class="box-category">
+    <div class="heading">
+        tin tức             
+    </div>
+    <div class="main">
+        <ul class="list-post-latest list_post">
+            
+                        <li>
+                <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/tranh-vui-dam-cuoi-dam-cuoi" title="Tranh vui: Đ&aacute;m cưới, đ&aacute;m... cười">
+                    <div class="img-overflow">  
+                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477172240.jpg" alt="Tranh vui: Đ&aacute;m cưới, đ&aacute;m... cười"/>
+                    </div>
+                    <p>Tranh vui: Đ&aacute;m cưới, đ&aacute;m... cười</p>
+                    <span> <i class="fa fa-clock-o"></i>  Cách đây  4 tuần</span>
+                </a>
+            </li>
+                        <li>
+                <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/5-cung-hoang-dao-s%E1%BA%B5n-sang-chi-tien-ty-lam-dam-cuoi" title="5 cung ho&agrave;ng đạo sẵn s&agrave;ng chi tiền tỷ l&agrave;m đ&aacute;m cưới">
+                    <div class="img-overflow">  
+                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477172040.jpg" alt="5 cung ho&agrave;ng đạo sẵn s&agrave;ng chi tiền tỷ l&agrave;m đ&aacute;m cưới"/>
+                    </div>
+                    <p>5 cung ho&agrave;ng đạo sẵn s&agrave;ng chi tiền tỷ l&agrave;m đ&aacute;m cưới</p>
+                    <span> <i class="fa fa-clock-o"></i>  Cách đây  4 tuần</span>
+                </a>
+            </li>
+                        <li>
+                <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/dam-cuoi-hanh-phuc-cua-nang-tiep-vien-hang-khong-xinh-nhu-gai-han" title="Đ&aacute;m cưới hạnh ph&uacute;c của n&agrave;ng tiếp vi&ecirc;n h&agrave;ng kh&ocirc;ng xinh như g&aacute;i H&agrave;n">
+                    <div class="img-overflow">  
+                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477171943.jpg" alt="Đ&aacute;m cưới hạnh ph&uacute;c của n&agrave;ng tiếp vi&ecirc;n h&agrave;ng kh&ocirc;ng xinh như g&aacute;i H&agrave;n"/>
+                    </div>
+                    <p>Đ&aacute;m cưới hạnh ph&uacute;c của n&agrave;ng tiếp vi&ecirc;n h&agrave;ng kh&ocirc;ng xinh như g&aacute;i H&agrave;n</p>
+                    <span> <i class="fa fa-clock-o"></i>  Cách đây  4 tuần</span>
+                </a>
+            </li>
+                        <li>
+                <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/lam-gi-trong-dem-tan-hon-khi-da-an-com-truoc-keng" title="L&agrave;m g&igrave; trong đ&ecirc;m t&acirc;n h&ocirc;n khi đ&atilde; ăn cơm trước kẻng">
+                    <div class="img-overflow">  
+                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477171826.jpg" alt="L&agrave;m g&igrave; trong đ&ecirc;m t&acirc;n h&ocirc;n khi đ&atilde; ăn cơm trước kẻng"/>
+                    </div>
+                    <p>L&agrave;m g&igrave; trong đ&ecirc;m t&acirc;n h&ocirc;n khi đ&atilde; ăn cơm trước kẻng</p>
+                    <span> <i class="fa fa-clock-o"></i>  Cách đây  4 tuần</span>
+                </a>
+            </li>
+                        <li>
+                <a href="http://localhost:2008/rapsukienhaiduong/public/bai-viet/ngay-cuoi-he-lo-ve-bi-mat-cuoc-hon-nhan" title="Ng&agrave;y cưới h&eacute; lộ về b&iacute; mật cuộc h&ocirc;n nh&acirc;n">
+                    <div class="img-overflow">  
+                        <img src="http://localhost:2008/rapsukienhaiduong/public/upload/1477171705.jpg" alt="Ng&agrave;y cưới h&eacute; lộ về b&iacute; mật cuộc h&ocirc;n nh&acirc;n"/>
+                    </div>
+                    <p>Ng&agrave;y cưới h&eacute; lộ về b&iacute; mật cuộc h&ocirc;n nh&acirc;n</p>
+                    <span> <i class="fa fa-clock-o"></i>  Cách đây  4 tuần</span>
+                </a>
+            </li>
+                        
+        </ul>
+    </div>
+</section>
+    
+                                        </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <section class="website-intro">
+	<h2><span>Giới thiệu</span></h2>
+	
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/-21UVbRRpBs" frameborder="0" allowfullscreen></iframe>
+<table border="0" cellpadding="1" cellspacing="1" style="width:100%">
+	<tbody>
+		<tr>
+			<td colspan="2"><span style="font-size:small"><span style="font-family:arial">Rạp sự kiện Hải Dương chuy&ecirc;n tư vấn v&agrave; cung cấp c&aacute;c dịch vụ trọn g&oacute;i về cưới hỏi. Honey Bees l&agrave; thương hiệu của c&ocirc;ng ty Những Con Ong Mật, mang &yacute; nghĩa mỗi th&agrave;nh vi&ecirc;n trong c&ocirc;ng ty lu&ocirc;n lu&ocirc;n chăm chỉ t&igrave;m t&ograve;i những &yacute; tưởng mới lạ, độc đ&aacute;o nhất cho kh&aacute;ch h&agrave;ng .</span></span></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<h3>L&atilde;nh vực kinh doanh của ch&uacute;ng t&ocirc;i:</h3>
+
+			<p>&nbsp;</p>
+
+			<h3>&nbsp;Dịch vụ trọn g&oacute;i đ&aacute;m cưới:</h3>
+
+			<p>-<span style="font-family:arial"><span style="font-size:small">&nbsp;Trang tr&iacute; lễ gia ti&ecirc;n</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- Trang tr&iacute; nh&agrave; h&agrave;ng tiệc cưới&nbsp;</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- M&acirc;m quả trọn g&oacute;i</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- Cho thu&ecirc; &aacute;o d&agrave;i, đồng phục, người&nbsp;bưng quả</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- Cổng hoa vải, hoa tươi</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- Xe hoa, hoa cầm tay</span></span></p>
+
+			<p><span style="font-family:arial"><span style="font-size:small">- Đ&atilde;i tiệc tại nh&agrave;</span></span></p>
+
+			<p>&nbsp;</p>
+
+			<h3>Cung cấp nh&acirc;n sự v&agrave; dịch vụ cho c&aacute;c nh&agrave; h&agrave;ng tiệc cưới tại HCM:</h3>
+
+			<p><span style="font-size:small"><span style="font-family:arial">- Nh&acirc;n vi&ecirc;n bưng quả</span></span></p>
+
+			<p><span style="font-size:small"><span style="font-family:arial">- Lễ t&acirc;n nh&agrave; h&agrave;ng</span></span></p>
+
+			<p><span style="font-size:small"><span style="font-family:arial">- Kh&aacute;nh tiết</span></span></p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p><span style="font-family:arial; font-size:small">- Với phương ch&acirc;m &quot;KH&Aacute;CH H&Agrave;NG TIN CẬY -&nbsp; RẠP SỰ KIỆN HẢI DƯƠNG TO&Agrave;N T&Acirc;M PHỤC VỤ &quot;, ch&uacute;ng t&ocirc;i lu&ocirc;n lắng nghe &yacute; kiến v&agrave; t&acirc;m tư nguyện vọng của qu&yacute; kh&aacute;ch. Đ&oacute; cũng ch&iacute;nh l&agrave; nền tảng v&agrave; l&agrave; kim chỉ nam để ch&uacute;ng t&ocirc;i phục vụ.</span></p>
+
+	
+</section>
+ 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div>
+                        <section class="box-category">
+    <div class="heading"><span>Hỗ trợ trực tuyến</span></div>
+    <div class="support-html">
+        <ul>
+                        <li>
+                <p>Mr Khi&ecirc;m - <span>0912 722 093</span> </p>
+                                <p style="color:#f00">Offline</p>
+                            </li>
+                    </ul>
+    </div>
+</section>
+ 
+                    </div>
+                    <div>
+                        <script language="javascript">
+                            <!--
+                                function newsletter_form(id,num)
+                                {
+                                    
+                                    //var frm=document+id;
+                                    var frm=document.forms[id];
+                                    //alert(frm);
+                                    // alert(frm.newsletter_email.value);return false;
+                                     if(frm.newsletters_email.value=='')
+                                     {
+                                         alert('Vui lòng nhập địa chỉ email');
+                                         return false;
+                                         }
+                                         var domain="http://demot402.web4s.vn/?site=newsletters";
+                                         $.post(domain, {newsletters_email: frm.newsletters_email.value,action:'request'})
+                                        .done(function( data ) {
+                                            $("#newsletters_result_"+num).html(data);
+                                        });
+                                        return false; 
+                                    }
+                                -->
+                        </script>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+                            
+                            <footer>
+                                                                    <section class="row-section footer-slideshow  row_0" style='  '>
+    <div class="container">
+        <!-----Slider------>
+        <!--CUSTOMER--> 
+        <section id="customer" class="clearfix">
+            <div class="itemcus">
+                <h2><span>Đối tác kinh doanh</span></h2>
+                <!-- Navigation -->             
+                <div class="customNavigation">
+                    <a class="prev prev_125201476776202" title=""><i class="fa fa-arrow-circle-o-left"></i></a>
+                    <a class="next next_125201476776202" title=""><i class="fa fa-arrow-circle-o-right"></i></a>
+                </div>
+                <div id="slide_125201476776202" class="owl-carousel cus">
+                    <!-- Customer 1 -->
+                    
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240870.png" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240712.png" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240774.jpg" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240696.jpg" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240685.png" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240677.png" alt="">
+                        </a>
+                    </div>
+                                        <div class="item">
+                        <a href="javascript:void(0)">
+                        <img style="height:60px" src="http://localhost:2008/rapsukienhaiduong/public/upload/1477240668.png" alt="">
+                        </a>
+                    </div>
+                                        
+                    <!-- Customer 1 -->
+                    
+                </div>
+            </div>
+        </section>
+        <script>
+            //script de chạy slide
+            $(document).ready(function() {
+              var owl = $("#slide_125201476776202");
+              owl.owlCarousel({
+                  items : 6,//man hinh rong
+                  itemsDesktop : [1000,4],//desktop
+                  itemsDesktopSmall : [900,3],//table ngang
+                  itemsTablet: [600,2],//
+                  itemsMobile : false
+            });
+            // Custom Navigation Events
+            $(".next_125201476776202").click(function(){
+                owl.trigger('owl.next');
+              })
+              $(".prev_125201476776202").click(function(){
+                owl.trigger('owl.prev');
+              })         
+            });
+        </script>
+    </div>
+</section
+
+                                                                <section class="row-section footer-html footer-html  row_1" style='background:#fafafa !important; padding:15px 0px !important; '>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                                <section class="footer-link">
+    <ul>
+    	<li><a href="http://localhost:2008/rapsukienhaiduong/public"> Trang chủ</a></li>
+                        <li><a href="https://localhost:2008/rapsukienhaiduong/public/menu" title="">giới thiệu đơn vị</a></li>
+                <li><a href="https://localhost:2008/rapsukienhaiduong/public/menu" title="">dịch vụ</a></li>
+                <li><a href="https://localhost:2008/rapsukienhaiduong/public/menu" title="">tin tức</a></li>
+                        <li><a href="http://localhost:2008/rapsukienhaiduong/public/thu-vien-anh"  >Thư viện ảnh</a></li>
+        <li><a href="http://localhost:2008/rapsukienhaiduong/public/lien-he"> Liên hệ</a></li>
+    </ul>
+    
+</section>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                <section class="logo-footer">
+                                                    <p><img alt="" src="http://rapsukienhaiduong.com/upload/images/logo.png" style="height:50px; width:510px" /></p>
+
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="row-section footer-html  row_2" style='background:#282828 !important; padding:5px 0px !important; '>
+                                    
+                                </section>
+                            </footer>
+                        </div>
+                        <!-- /main --> 
+                    </div>
+                    <!-- /st-content-inner --> 
+                </div>
+                <!-- /st-content --> 
+            </div>
+            <!-- /st-pusher --> 
+        </div>
+        <!-- /st-container -->        
+        <!-- Load main.js-->
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/main.js"></script>
+        <!-- OWL Carousel jquery -->
+        <!--end id=page-->
+        <script src="http://localhost:2008/rapsukienhaiduong/public/assets/frontend/js/custom.js"></script>
+        
+    </body>
+</html>
+";

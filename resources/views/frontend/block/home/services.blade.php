@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="des-product">
-                                    <a href="{{ route('posts.category',$val->alias) }}" title="{{ $val->name }}">
+                                    <a href="{{ route('posts',$val->alias) }}" title="{{ $val->name }}">
                                         <h3>{{ $val->name }}</h3>
                                     </a>
                                     <p>{{ $val->description }}.</p>

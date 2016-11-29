@@ -1,15 +1,15 @@
-<?php $__env->startSection('content'); ?>
+@extends('backend.master')
+@section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <?php echo e(ucwords($e['module'])); ?>
-
+        {{ ucwords($e['module']) }}
         
     </h1>
     <ol class="breadcrumb">
-        <li><a href="<?php echo e(route('backend.home')); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo route($e['route'].'.list.get') ?>"><?php echo e(ucwords($e['module'])); ?></a></li>
-       	<li class="active"><?php echo e(ucwords($e['action'])); ?></li>
+        <li><a href="{{ route('backend.home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?php echo route($e['route'].'.list.get') ?>">{{ ucwords($e['module']) }}</a></li>
+       	<li class="active">{{ ucwords($e['action']) }}</li>
         
     </ol>
 </section>
@@ -17,42 +17,37 @@
 <section class="content">
 	<div class="row">
 		<div class="col-xs-12">
-			<?php if(Session::has('alert')): ?>
-				<?php echo Session::get('alert'); ?>
-
-			<?php endif; ?>
+			@if(Session::has('alert'))
+				{!! Session::get('alert') !!}
+			@endif
 			<div class="box box-primary">
 				<div class="box-header with-border">
-				  	<h3 class="box-title"><?php echo e(ucwords($e['action'])); ?></h3>
+				  	<h3 class="box-title">{{ ucwords($e['action']) }}</h3>
 				  	<a href="<?php echo route($e['route'].'.add.get') ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Thêm Mới</a>
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form method="post" enctype="multipart/form-data">
-					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="box-body">
 						<div class="form-group">
 						  <label>Tên</label>
-						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo e($index->name); ?>">
-						</div>
-						
-						<div class="form-group">
-						  <label>Ảnh</label>
-						  <input type="file" name="image">
+						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="{{ $index->name }}" required="">
 						</div>
 						<div class="form-group">
-							<img src="<?php echo e(asset($index->image)); ?>" width="200">
+						  <label>Đường Dẫn Ảo</label>
+						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" value="{{ $index->alias }}" required="">
 						</div>
 						
 						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
-								<?php if($index->status == 1): ?>
+								@if($index->status == 1)
 								<option value="1">Hiển Thị</option>
 								<option value="0">Không Hiển Thị</option>
-								<?php else: ?>
+								@else
 								<option value="0">Không Hiển Thị</option>
 								<option value="1">Hiển Thị</option>
-								<?php endif; ?>
+								@endif
 							</select>
 						</div>
 						
@@ -69,5 +64,4 @@
 	</div>
 </section>
 <!-- /.content -->
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('backend.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

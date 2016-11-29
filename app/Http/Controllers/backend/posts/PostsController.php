@@ -32,7 +32,9 @@ class PostsController extends Controller
         $cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
         $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
-        return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','posts'))->with(['e' => $this->e]);
+        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
+
+        return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','posts','tags'))->with(['e' => $this->e]);
     }
 
     public function add_post(Request $req){
@@ -63,7 +65,7 @@ class PostsController extends Controller
             $data['image'] = 'upload/'.$image_name;
         }
         
-
+        $data['tags'] = implode(',',$req->tags);
         $data['fk_catid'] = $req->fk_catid;
         $data['order'] = $req->order;
         $data['IsCustomer'] = 0;
@@ -95,8 +97,9 @@ class PostsController extends Controller
         $this->e['action'] = ucfirst($index->name);
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_catid);
         $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
+        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
 
-        return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','posts'))->with(['e' => $this->e]);
+        return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','posts','tags'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){
@@ -133,6 +136,7 @@ class PostsController extends Controller
             $data['image'] = 'upload/'.$image_name;
         }
 
+        $data['tags'] = implode(',',$req->tags);
         $data['fk_catid'] = $req->fk_catid;
         $data['order'] = $req->order;
         $data['IsCustomer'] = 0;
