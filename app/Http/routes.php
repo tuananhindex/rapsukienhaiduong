@@ -112,9 +112,9 @@ Route::group(['middleware' => ['web']], function () {
 		    	Route::group(['prefix' => 'posts'],function(){
 					Route::get('add',['as' => 'backend.posts.posts.add.get' , 'uses' => 'backend\posts\PostsController@add_get']);
 					Route::post('add',['as' => 'backend.posts.posts.add.post' , 'uses' => 'backend\posts\PostsController@add_post']);
-					Route::get('edit/{id}',['as' => 'backend.posts.posts.edit.get' , 'uses' => 'backend\posts\PostsController@edit_get']);
+					Route::get('edit/{id}/{lang?}',['as' => 'backend.posts.posts.edit.get' , 'uses' => 'backend\posts\PostsController@edit_get']);
 					Route::post('edit/{id}',['as' => 'backend.posts.posts.edit.post' , 'uses' => 'backend\posts\PostsController@edit_post']);
-					Route::get('{key?}/{cat?}',['as' => 'backend.posts.posts.list.get' , 'uses' => 'backend\posts\PostsController@list_get']);
+					Route::get('{key?}',['as' => 'backend.posts.posts.list.get' , 'uses' => 'backend\posts\PostsController@list_get']);
 					Route::post('/',['as' => 'backend.posts.posts.list.post' , 'uses' => 'backend\posts\PostsController@list_post']);
 					Route::get('delete/{id}',['as' => 'backend.posts.posts.delete' , 'uses' => 'backend\posts\PostsController@delete']);
 		    	});
@@ -180,6 +180,16 @@ Route::group(['middleware' => ['web']], function () {
 				Route::get('delete/{id}',['as' => 'backend.tag.delete' , 'uses' => 'backend\TagController@delete']);
 	    	});
 
+	    	Route::group(['prefix' => 'language'],function(){
+				Route::get('add',['as' => 'backend.language.add.get' , 'uses' => 'backend\LanguageController@add_get']);
+				Route::post('add',['as' => 'backend.language.add.post' , 'uses' => 'backend\LanguageController@add_post']);
+				Route::get('edit/{id}',['as' => 'backend.language.edit.get' , 'uses' => 'backend\LanguageController@edit_get']);
+				Route::post('edit/{id}',['as' => 'backend.language.edit.post' , 'uses' => 'backend\LanguageController@edit_post']);
+				Route::get('{key?}',['as' => 'backend.language.list.get' , 'uses' => 'backend\LanguageController@list_get']);
+				Route::post('/',['as' => 'backend.language.list.post' , 'uses' => 'backend\LanguageController@list_post']);
+				Route::get('delete/{id}',['as' => 'backend.language.delete' , 'uses' => 'backend\LanguageController@delete']);
+	    	});
+
 	    	Route::group(['prefix' => 'profile'],function(){
 				Route::get('/',['as' => 'backend.profile' , 'uses' => 'backend\ProfileController@index']);
 				Route::post('edit',['as' => 'backend.profile.edit' , 'uses' => 'backend\ProfileController@edit']);
@@ -194,7 +204,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	    	Route::group(['prefix' => 'ajax'],function(){
 	    		Route::get('get_data_cursor',['as' => 'get_data_cursor' , 'uses' => 'backend\AjaxController@get_data_cursor']);
-
+	    		Route::get('add_lang',['as' => 'add_lang' , 'uses' => 'backend\AjaxController@add_lang']);
 	    	});
 	    });
     });

@@ -13,6 +13,17 @@
         </ul>
     </li>
 
+    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.language')) > 0) active @endif treeview">
+        <a href="#"><i class="fa fa-language"></i> Ngôn Ngữ <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.language.add.get')) > 0) active @endif">
+                <a href="{{ route('backend.language.add.get') }}"><i class="fa fa-plus"></i> Thêm</a>
+                
+            </li>
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.language.list.get')) > 0) active @endif"><a href="{{ route('backend.language.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
+        </ul>
+    </li>
+
     <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product')) > 0) active @endif treeview">
         <a href="#">
             <i class="fa fa-product-hunt"></i> <span>Module Sản Phẩm</span> <i class="fa fa-angle-left pull-right"></i>
@@ -136,5 +147,5 @@
         </ul>
     </li>
 
-    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.meta_default')) > 0) active @endif"><a href="{{ route('backend.meta_default.get') }}"><i class="fa fa-tags"></i> <span>Meta Mặc Định</span></a></li>
+    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.meta_default')) > 0) active @endif"><a href="{{ route('backend.meta_default.get') }}"><i class="fa fa-gear"></i> <span>Meta Mặc Định</span></a></li>
 </ul>

@@ -13,13 +13,13 @@ use Validator;
 use Session;
 use Cache;
 
-class TagController extends Controller
+class LanguageController extends Controller
 {
 	private $e = [
-					'view' => 'backend.tag',
-					'route' => 'backend.tag',
-					'module' => 'Tags',
-					'table' => 'tag'
+					'view' => 'backend.language',
+					'route' => 'backend.language',
+					'module' => 'Ngôn Ngữ',
+					'table' => 'language'
 				];
 	public function __construct(){
 		View::share('e',$this->e);
@@ -36,21 +36,34 @@ class TagController extends Controller
         Cache::flush();
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required'
+            'image' => 'image|max:1000'
         ],[
-        	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo'
+            'name.required' => 'Bạn chưa nhập tên',
+            'image.image' => 'File tải lên phải là ảnh',
+            'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
         ]);
         $error = $validator->errors()->first();
         if($error){
-        	return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
+            return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
         
 
     	$data['name'] = $req->name;
-    	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias);
+    	$data['default'] = $req->default;
+        if($data['default'] == 1){
+            DB::table($this->e['table'])->update(['default' => 0]);
+        }
 
-    	
+        
+
+        if($req->file('image')){
+            $image = $req->file('image');
+            $image_name = time().'.'.$image->getClientOriginalExtension();
+            $image->move('upload',$image_name);
+            $data['image'] = 'upload/'.$image_name;
+        }
+
+    	$data['order'] = $req->order;
     	$data['status'] = $req->status;
     	$data['create_at'] = date('Y-m-d H:i:s');
     	
@@ -76,25 +89,39 @@ class TagController extends Controller
         Cache::flush();
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required'],[
-        	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo'
+            'image' => 'image|max:1000'
+        ],[
+            'name.required' => 'Bạn chưa nhập tên',
+            'image.image' => 'File tải lên phải là ảnh',
+            'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
         ]);
         $error = $validator->errors()->first();
         if($error){
-        	return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
+            return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
 
         $index = DB::table($this->e['table'])->where('id',$id);
         
 
     	$data['name'] = $req->name;
-    	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias,$index->first()->id);
+        $data['default'] = $req->default;
+        if($data['default'] == 1){
+            DB::table($this->e['table'])->update(['default' => 0]);
+        }
 
+    	if($req->file('image')){
+            if(file_exists($index->first()->image)){
+                unlink($index->first()->image);
+            }
+            $image = $req->file('image');
+            $image_name = time().'.'.$image->getClientOriginalExtension();
+            $image->move('upload',$image_name);
+            $data['image'] = 'upload/'.$image_name;
+        }
     	
-    	
-    	$data['status'] = $req->status;
-    	$data['update_at'] = date('Y-m-d H:i:s');
+    	$data['order'] = $req->order;
+        $data['status'] = $req->status;
+        $data['create_at'] = date('Y-m-d H:i:s');
     	
 
     	$index->update($data);
@@ -131,13 +158,27 @@ class TagController extends Controller
             if(count($ids) == 0){
                 return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
             }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
             if($request->show){
                 $status = 1;
             }else{
                 $status = 0;
             }
-            DB::table($this->e['table'])->whereIn('id',$ids)->update(['status' => $status]);
+            DB::table($this->e['table'])->whereIn('id',$ids)->whereNotIn('default',[1])->update(['status' => $status]);
             return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Cập nhật trạng thái thành công')]);
+        }elseif($request->default){
+            $ids = $request->id;
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn ngôn ngữ')]);
+            }elseif(count($ids) > 1){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chỉ có thể chọn 1 ngôn ngữ làm ngôn ngữ mặc định')]);
+            }else{
+                DB::table($this->e['table'])->update(['default' => 0]);
+                DB::table($this->e['table'])->whereIn('id',$ids)->update(['default' => 1]);
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Thiết lập ngôn ngữ mặc định thành công')]);
+            }
         }else{
             return redirect(route($this->e['route'].'.list.get',$request->search));
         }

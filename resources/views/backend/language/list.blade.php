@@ -26,31 +26,15 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="box">
                 @include('backend.widget.list_box_header')
-
-
                 <!-- /.box-header -->
-                <div class="box-body table-responsive no-padding" style="min-height:250px;">
-                  <div class="form-inline">
-                      <label style="margin:0 5px 0 12px;">Danh Mục</label>
-                      <select class="form-control filter_cat">
-                        <option value="0">Không</option>
-                        {!! $MultiLevelSelect !!}
-                      </select>
-
-                      <label style="margin:0 5px 0 12px;">Ngôn Ngữ</label>
-                      <select class="form-control filter_language">
-                        @foreach($languages as $val)
-                        <option value="{{ $val->id }}">{{ ucfirst($val->name) }}</option>
-                        @endforeach
-                      </select>
-                  </div>
-
+                <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tbody>
                     <tr>
                       <th><input type="checkbox" class="check_box_all"></th>
                       <th>Ảnh</th>
                       <th>Tên</th>
+                      <th>Mặc định</th>
                       <th>Ngày tạo</th>
                       <th>Cập nhật gần nhất</th>
                       <th>Trạng thái</th>
@@ -61,6 +45,11 @@
                       <td><input type="checkbox" class="check_box" name="id[]" value="{{ $val->id }}"></td>
                       <td>@if(file_exists($val->image)) <img src="{{ asset($val->image) }}" width="100"> @endif</td>
                       <td><a href="<?php echo route($e['route'].'.edit.get',$val->id) ?>">{{ ucfirst($val->name) }}</a></td>
+                      <td>
+                        @if($val->default == 1)
+                            <i class="fa fa-check"></i>
+                        @endif
+                      </td>
                       <td>{{ date('h:i d/m/Y',strtotime($val->create_at)) }}</td>
                       <td>@if(!empty($val->update_at)){{ date('h:i d/m/Y',strtotime($val->update_at)) }}@else Chưa có cập nhật @endif</td>
                       <td>
@@ -91,16 +80,5 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-  $('select.filter_cat').change(function(){
-      var val = $(this).val();
-      if(val == 0){
-        location.href = '{{ route(Route::currentRouteName()) }}';
-      }else{
-        location.href = '{{ route(Route::currentRouteName()) }}?cat_id='+$(this).val();
-      }
-      
-  });
-</script>
 <!-- /.content -->
 @endsection

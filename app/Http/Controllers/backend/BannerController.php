@@ -130,6 +130,18 @@ class BannerController extends Controller
         //return dd($request->all());
         if($request->show || $request->hide){
             $ids = $request->id;
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
             if($request->show){
                 $status = 1;
             }else{

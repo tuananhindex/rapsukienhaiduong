@@ -1,15 +1,15 @@
-@extends('backend.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        {{ ucwords($e['module']) }}
+        <?php echo e(ucwords($e['module'])); ?>
+
         
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('backend.home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo route($e['route'].'.list.get') ?>">{{ ucwords($e['module']) }}</a></li>
-       	<li class="active">{{ ucwords($e['action']) }}</li>
+        <li><a href="<?php echo e(route('backend.home')); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="<?php echo route($e['route'].'.list.get') ?>"><?php echo e(ucwords($e['module'])); ?></a></li>
+       	<li class="active"><?php echo e(ucwords($e['action'])); ?></li>
         
     </ol>
 </section>
@@ -17,118 +17,120 @@
 <section class="content">
 	<div class="row">
 		<div class="col-xs-12">
-			@if(Session::has('alert'))
-				{!! Session::get('alert') !!}
-			@endif
+			<?php if(Session::has('alert')): ?>
+				<?php echo Session::get('alert'); ?>
+
+			<?php endif; ?>
 			<div class="box box-primary">
 				<div class="box-header with-border">
-				  	<h3 class="box-title">{{ ucwords($e['action']) }}</h3>
+				  	<h3 class="box-title"><?php echo e(ucwords($e['action'])); ?></h3>
 				  	<div class="col-xs-5 pull-right">
 				  		<a href="<?php echo route($e['route'].'.add.get') ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Thêm Mới</a>
 					  	<button type="button" class="btn btn-success pull-right" style="margin-right:5px"  data-toggle="modal" data-target="#form-add-lang"><i class="fa fa-plus"></i> Thêm Ngôn Ngữ</button>
-					  	@if($index->status == 1)
+					  	<?php if($index->status == 1): ?>
 					  	<a href="<?php echo route($e['frontend_route'],$index->alias) ?>" target="_blank" class="btn btn-warning pull-right" style="margin-right:5px"><i class="fa fa-eye"></i> Xem</a>
-					  	@endif
+					  	<?php endif; ?>
 
 				  	</div>
 				  	
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form method="post" enctype="multipart/form-data">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 					<div class="box-body">
 						<div class="form-group">
 						  <label>Tên</label>
-						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="{{ $index->name }}" required="">
+						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo e($index->name); ?>" required="">
 						</div>
 						<div class="form-group">
 						  <label>Đường Dẫn Ảo</label>
-						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" value="{{ $index->alias }}" required="">
+						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" value="<?php echo e($index->alias); ?>" required="">
 						</div>
 						<div class="form-group">
 						  <label>Ảnh đại diện</label>
 						  <input type="file" name="image">
 						</div>
 						<div class="form-group">
-							<img src="{{ asset($index->image) }}" width="200">
+							<img src="<?php echo e(asset($index->image)); ?>" width="200">
 						</div>
 						<div class="form-group">
 						  	<label>Danh Mục</label>
 						  	<select class="form-control" name="fk_catid">
 								<option value="0">Không</option>
-								{!! $MultiLevelSelect !!}
+								<?php echo $MultiLevelSelect; ?>
+
 							</select>
 						</div>
 						
 						<div class="form-group">
 						  <label>Thứ Tự</label>
-						  <input type="number" class="form-control" name="order" value="{{ $index->order }}" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
+						  <input type="number" class="form-control" name="order" value="<?php echo e($index->order); ?>" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
 						</div>
 						<div class="form-group">
 						  <label>
-						  	<input type="checkbox" name="IsCustomer" value="1" @if($index->IsCustomer == 1) checked @endif> Hiển thị ở trang chủ
+						  	<input type="checkbox" name="IsCustomer" value="1" <?php if($index->IsCustomer == 1): ?> checked <?php endif; ?>> Hiển thị ở trang chủ
 						  </label>
 						  
 						</div>
 						<div class="form-group">
 						  <label>Mô tả</label>
-						  <textarea class="form-control" name="description" id="description">{{ $index->description }}</textarea>
+						  <textarea class="form-control" name="description" id="description"><?php echo e($index->description); ?></textarea>
 						  
 						</div>
 
-						@if(count($posts) > 0)
+						<?php if(count($posts) > 0): ?>
 						<div class="form-group">
 						  	<label>Chèn bài viết vào nội dung</label>
 						  	<select class="add_posts form-control">
-						  		@foreach($posts as $val)
-						  			<option value="{{ route('posts',$val->alias) }}hihihihi{{ ucfirst($val->name) }}">{{ ucfirst($val->name) }}</option>
-						  		@endforeach
+						  		<?php foreach($posts as $val): ?>
+						  			<option value="<?php echo e(route('posts',$val->alias)); ?>hihihihi<?php echo e(ucfirst($val->name)); ?>"><?php echo e(ucfirst($val->name)); ?></option>
+						  		<?php endforeach; ?>
 							</select>
 							<input class="btn btn-primary btn-sm btn-add-link" style="margin: 5px 0" value="Chèn Link">
-						@endif  
+						<?php endif; ?>  
 						</div>
 						
 						<div class="form-group">
 						  <label>Nội dung</label>
-						  <textarea class="form-control" name="content">{{ $index->content }}</textarea>
+						  <textarea class="form-control" name="content"><?php echo e($index->content); ?></textarea>
 						  <script type="text/javascript">ckeditor('content')</script>
 						</div>
 						
 						<div class="form-group">
 						  <label>Meta Title</label>
-						  <input type="text" class="form-control" name="meta_title" value="{{ $index->meta_title }}">
+						  <input type="text" class="form-control" name="meta_title" value="<?php echo e($index->meta_title); ?>">
 						</div>
 						<div class="form-group">
 						  <label>Meta Description</label>
-						  <textarea class="form-control" name="meta_description">{{ $index->meta_description }}</textarea>
+						  <textarea class="form-control" name="meta_description"><?php echo e($index->meta_description); ?></textarea>
 						</div>
 						<div class="form-group">
 						  <label>Meta Keywords</label>
-						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,..." value="{{ $index->meta_keywords }}">
+						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,..." value="<?php echo e($index->meta_keywords); ?>">
 						</div>
 						<div class="form-group">
 							<label>Tags</label>
 							<select data-placeholder="Tags" multiple class="form-control chosen-select" tabindex="8" name="tags[]">
-								@if(isset($tags) && count($tags) > 0)
+								<?php if(isset($tags) && count($tags) > 0): ?>
 								<?php
 									$tags_arr = explode(',', $index->tags);
 								?>
-								@foreach($tags as $val)
-					            <option value="{{ $val->alias }}" @if(in_array($val->alias,$tags_arr)) selected @endif>{{ $val->name }}</option>
-					            @endforeach
-					            @endif
+								<?php foreach($tags as $val): ?>
+					            <option value="<?php echo e($val->alias); ?>" <?php if(in_array($val->alias,$tags_arr)): ?> selected <?php endif; ?>><?php echo e($val->name); ?></option>
+					            <?php endforeach; ?>
+					            <?php endif; ?>
 		                    </select>
 	                    </div>
 						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
-								@if($index->status == 1)
+								<?php if($index->status == 1): ?>
 								<option value="1">Hiển Thị</option>
 								<option value="0">Không Hiển Thị</option>
-								@else
+								<?php else: ?>
 								<option value="0">Không Hiển Thị</option>
 								<option value="1">Hiển Thị</option>
-								@endif
+								<?php endif; ?>
 							</select>
 						</div>
 						
@@ -159,7 +161,7 @@
 			<h3 class="box-title">Thêm ngôn ngữ</h3>
 		</div>
 		<div class="box-body">
-			<input type="hidden" name="table" value="{{ $e['table'] }}">
+			<input type="hidden" name="table" value="<?php echo e($e['table']); ?>">
 			<div class="form-group">
 			  <label>Tên</label>
 			  <input type="text" class="form-control" name="lang_name" placeholder="Nhập tên"  required="">
@@ -167,9 +169,9 @@
 			<div class="form-group">
 			  <label>Ngôn ngữ</label>
 			  <select class="form-control" name="language" class="language">
-                @foreach($languages as $val)
-                <option value="{{ $val->id }}">{{ ucfirst($val->name) }}</option>
-                @endforeach
+                <?php foreach($languages as $val): ?>
+                <option value="<?php echo e($val->id); ?>"><?php echo e(ucfirst($val->name)); ?></option>
+                <?php endforeach; ?>
               </select>
 			</div>
 			<div class="form-group">
@@ -178,17 +180,17 @@
 			  
 			</div>
 
-			@if(count($posts_lang) > 0)
+			<?php if(count($posts_lang) > 0): ?>
 			<div class="form-group">
 			  	<label>Chèn bài viết vào nội dung</label>
 			  	<select class="add_posts-lang form-control">
-			  		@foreach($posts_lang as $val)
-			  			<option value="{{ route('posts',$val->alias) }}hihihihi{{ ucfirst($val->name) }}">{{ ucfirst($val->name) }}</option>
-			  		@endforeach
+			  		<?php foreach($posts_lang as $val): ?>
+			  			<option value="<?php echo e(route('posts',$val->alias)); ?>hihihihi<?php echo e(ucfirst($val->name)); ?>"><?php echo e(ucfirst($val->name)); ?></option>
+			  		<?php endforeach; ?>
 				</select>
 				<input class="btn btn-primary btn-sm btn-add-link-lang" style="margin: 5px 0" value="Chèn Link">
 			</div>
-			@endif  
+			<?php endif; ?>  
 			
 			
 			<div class="form-group">
@@ -199,7 +201,7 @@
 		</div>
 		<div class="box-footer">
 			<button type="button" class="btn btn-success pull-right save-lang">Lưu</button>
-			<img width="20" style="margin: 5px 10px 0 0 ; display: none" class="pull-right" src="{{ asset('assets/admin/img/loading.gif') }}" id="loadding">
+			<img width="20" style="margin: 5px 10px 0 0 ; display: none" class="pull-right" src="<?php echo e(asset('assets/admin/img/loading.gif')); ?>" id="loadding">
 
 		</div>
 		<!-- /.box-body -->
@@ -236,7 +238,7 @@
 
             type: "GET",
 
-            url: "{{ route('add_lang') }}",
+            url: "<?php echo e(route('add_lang')); ?>",
 
             data: { 
             		table : $('input[name="table"]').val(),
@@ -284,4 +286,5 @@
 
 
 <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

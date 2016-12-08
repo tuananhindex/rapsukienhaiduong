@@ -33,10 +33,11 @@ class ProfileController extends Controller
     public function edit(Request $req){
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'email' => 'email'
+            'email' => 'email|unique:users'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
-        	'email.email' => 'Email chưa đúng định dạng'
+        	'email.email' => 'Email chưa đúng định dạng',
+            'email.unique' => 'Email này đã được đăng ký'
         ]);
         $error = $validator->errors()->first();
         if($error){

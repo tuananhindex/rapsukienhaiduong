@@ -23,15 +23,20 @@ class PostsController extends Controller
                     'module' => 'bài viết',
                     'table' => 'posts'
                 ];
+    private $df_lang;
+
     public function __construct(){
         View::share('e',$this->e);
+
+        $this->df_lang = DB::table('language')->where('default',1)->first();
+        View::share('df_lang',$this->df_lang);
     }
 
     public function add_get(){
         $this->e['action'] = 'Thêm';
         $cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
-        $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
+        $posts = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $this->df_lang->id])->select('name','alias')->get();
         $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
 
         return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','posts','tags'))->with(['e' => $this->e]);
@@ -54,9 +59,14 @@ class PostsController extends Controller
             return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
         
+        // Những phần riêng
+        $data_private['name'] = $req->name;
+        $data_private['description'] = $req->description;
+        $data_private['content'] = $req->content;
+        $data_private['language'] = $this->df_lang->id;
+        // end
 
-        $data['name'] = $req->name;
-        $data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias);
+        $data['alias'] = AdminHelper::check_alias($this->e['table'].'_common',$req->alias);
 
         if($req->file('image')){
             $image = $req->file('image');
@@ -65,7 +75,11 @@ class PostsController extends Controller
             $data['image'] = 'upload/'.$image_name;
         }
         
-        $data['tags'] = implode(',',$req->tags);
+        
+        if($req->tags){
+            $data['tags'] = implode(',',$req->tags);
+        }
+        
         $data['fk_catid'] = $req->fk_catid;
         $data['order'] = $req->order;
         $data['IsCustomer'] = 0;
@@ -73,16 +87,16 @@ class PostsController extends Controller
             $data['IsCustomer'] = $req->IsCustomer;
         }
         
-        $data['description'] = $req->description;
-        $data['content'] = $req->content;
+        
         $data['meta_title'] = $req->meta_title;
         $data['meta_description'] = $req->meta_description;
         $data['meta_keywords'] = $req->meta_keywords;
         $data['status'] = $req->status;
         $data['create_at'] = date('Y-m-d H:i:s');
         
+        $data_private['fk_commonid'] = DB::table($this->e['table'].'_common')->insertGetId($data);
+        $id = DB::table($this->e['table'])->insertGetId($data_private);
 
-        $id = DB::table($this->e['table'])->insertGetId($data);
         if($req->save){
             return redirect(route($this->e['route'].'.edit.get',$id))->with('alert',AdminHelper::alert_admin('success','fa-check','thêm thành công'));
         }else{
@@ -90,16 +104,29 @@ class PostsController extends Controller
         }
     }
 
-    public function edit_get($id){
-        
+    public function edit_get($id,$lang = ''){
+        if(empty($lang)){
+            $lang = $this->df_lang->id;
+        }
         $cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
-        $index = DB::table($this->e['table'])->where('id',$id)->first();
+        $index = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where([$this->e['table'].'.id' => $id ,'language' => $lang])->first();
         $this->e['action'] = ucfirst($index->name);
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_catid);
-        $posts = DB::table('posts')->where('status',1)->select('alias','name')->get();
-        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
+        $posts = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $index->language])->select('name','alias')->get();
 
-        return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','posts','tags'))->with(['e' => $this->e]);
+        
+        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
+        // Lấy ra các ngôn ngữ đã có
+        $has_languages = DB::table($this->e['table'])->where($this->e['table'].'.id' , $id )->select('language')->get();
+        
+        foreach ($has_languages as $key => $value) {
+            $common_id[] = $value->language;
+        }
+        $languages = DB::table('language')->whereNotIn('id',$common_id)->where('status',1)->get();
+
+        $posts_lang = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $languages[0]->id])->select('name','alias')->get();
+
+        return view($this->e['view'].'.edit',compact('index','posts_lang','cats','MultiLevelSelect','posts','tags','languages'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){
@@ -120,15 +147,18 @@ class PostsController extends Controller
         }
 
         $index = DB::table($this->e['table'])->where('id',$id);
-        
+        $common = DB::table($this->e['table'].'_common')->where('id',$index->first()->fk_commonid)->first();
 
-        $data['name'] = $req->name;
-        $data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias,$index->first()->id);
+        $data_private['name'] = $req->name;
+        $data_private['description'] = $req->description;
+        $data_private['content'] = $req->content;
+
+        $data['alias'] = AdminHelper::check_alias($this->e['table'].'_common',$req->alias,$index->first()->fk_commonid);
 
         
         if($req->file('image')){
-            if(file_exists($index->first()->image)){
-                unlink($index->first()->image);
+            if(file_exists($common->image)){
+                unlink($common->image);
             }
             $image = $req->file('image');
             $image_name = time().'.'.$image->getClientOriginalExtension();
@@ -136,15 +166,16 @@ class PostsController extends Controller
             $data['image'] = 'upload/'.$image_name;
         }
 
-        $data['tags'] = implode(',',$req->tags);
+        if($req->tags){
+            $data['tags'] = implode(',',$req->tags);
+        }
         $data['fk_catid'] = $req->fk_catid;
         $data['order'] = $req->order;
         $data['IsCustomer'] = 0;
         if(isset($req->IsCustomer)){
             $data['IsCustomer'] = $req->IsCustomer;
         }
-        $data['description'] = $req->description;
-        $data['content'] = $req->content;
+        
         $data['meta_title'] = $req->meta_title;
         $data['meta_description'] = $req->meta_description;
         $data['meta_keywords'] = $req->meta_keywords;
@@ -152,7 +183,9 @@ class PostsController extends Controller
         $data['update_at'] = date('Y-m-d H:i:s');
         
 
-        $index->update($data);
+        DB::table($this->e['table'].'_common')->where('id',$index->first()->fk_commonid)->update($data);
+
+        $index->update($data_private);
         if($req->save){
             return redirect(route($this->e['route'].'.edit.get',$id))->with('alert',AdminHelper::alert_admin('success','fa-check','cập nhật thành công'));
         }else{
@@ -167,16 +200,19 @@ class PostsController extends Controller
         }else{
             $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
         }
+
+        $languages = DB::table('language')->where('status',1)->get();
         
-        $data = DB::table($this->e['table'])->orderBy('order','desc')->orderBy('id','desc');
+        
+        $data = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->orderBy('order','desc')->orderBy($this->e['table'].'.id','desc');
         if(!empty($key)){
             $data = $data->where('name','like','%'.$key.'%');
         }
         if(Input::has('cat_id')){
             $data = $data->where('fk_catid',Input::get('cat_id'));
         }
-        $data = $data->paginate(10);
-        return view($this->e['view'].'.list',compact('data','MultiLevelSelect'), [
+        $data = $data->select('*',$this->e['table'].'.id as id')->paginate(10);
+        return view($this->e['view'].'.list',compact('data','MultiLevelSelect','languages'), [
             'data' => $data->appends(Input::except('page'))
         ])->with(['e' => $this->e]);
     }
@@ -185,6 +221,18 @@ class PostsController extends Controller
         //return dd($request->all());
         if($request->show || $request->hide){
             $ids = $request->id;
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
+            if(count($ids) == 0){
+                return redirect()->back()->with(['alert' => AdminHelper::alert_admin('danger','fa-ban','Bạn chưa chọn bản ghi nào')]);
+            }
             if($request->show){
                 $status = 1;
             }else{
@@ -199,8 +247,8 @@ class PostsController extends Controller
     }
 
     public function delete($id){
-        // DB::table($this->e['table'])->where('id',$id)->delete();
-     //    return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
-        return redirect()->back();
+        DB::table($this->e['table'])->where('id',$id)->delete();
+        return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
+        //return redirect()->back();
     }
 }

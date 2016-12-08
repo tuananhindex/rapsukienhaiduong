@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Request;
 use DB;
+use Validator;
 
 
 class AjaxController extends Controller
@@ -42,5 +43,27 @@ class AjaxController extends Controller
         //return 123;
     }
 
-    
+    public function add_lang(){
+        if(Request::ajax()) {
+
+            $table = $_GET['table'];
+            unset($_GET['table']);
+            $validator = Validator::make($_GET, [
+                'name' => 'required'
+            ],[
+                'name.required' => 'Bạn chưa nhập tên'
+            ]);
+            $error = $validator->errors()->first();
+            if($error){
+                $rs['status'] = 'error';
+                $rs['message'] = $error;
+                echo json_encode($rs);
+                die();
+            }
+
+            DB::table($table)->insert($_GET);
+            $rs['status'] = 'success';
+            echo json_encode($rs);
+        }
+    }
 }

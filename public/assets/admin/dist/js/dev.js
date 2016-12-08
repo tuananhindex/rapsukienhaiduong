@@ -1,7 +1,7 @@
 //$(document).ready(function(){
     // Tự nhập đường dẫn ảo bằng sự kiện keydown và keyup
 $('input[name="name"]').bind('keydown keyup',function(){
-    $('input[name="alias"]').val(changeTitle($(this).val()));
+    $('.add-alias').val(changeTitle($(this).val()));
     $('input[name="meta_title"]').val($(this).val());
     
 });

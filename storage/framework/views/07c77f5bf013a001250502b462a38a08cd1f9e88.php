@@ -7,49 +7,49 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/bootstrap/css/bootstrap.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/bootstrap/css/bootstrap.min.css')); ?> ">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/font-awesome/css/font-awesome.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/font-awesome/css/font-awesome.min.css')); ?> ">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/ionicons.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/dist/css/ionicons.min.css')); ?> ">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/AdminLTE.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/dist/css/AdminLTE.min.css')); ?> ">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/skins/_all-skins.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/dist/css/skins/_all-skins.min.css')); ?> ">
     <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/iCheck/flat/blue.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/iCheck/flat/blue.css')); ?> ">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/morris/morris.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/morris/morris.css')); ?> ">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css')); ?> ">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datepicker/datepicker3.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/datepicker/datepicker3.css')); ?> ">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/daterangepicker/daterangepicker-bs3.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/daterangepicker/daterangepicker-bs3.css')); ?> ">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?> ">
     <!-- chosen -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/chosen/prism.css') }} ">
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/chosen/chosen.css') }} ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/chosen/prism.css')); ?> ">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/admin/plugins/chosen/chosen.css')); ?> ">
 
-    @yield('css')
+    <?php echo $__env->yieldContent('css'); ?>
 
     <!-- Editer -->
 
-    <script src="{!! asset('assets/admin/plugins/ckeditor-dev/ckeditor/ckeditor.js') !!}"></script>
+    <script src="<?php echo asset('assets/admin/plugins/ckeditor-dev/ckeditor/ckeditor.js'); ?>"></script>
 
-    <script src="{!! asset('assets/admin/plugins/ckeditor-dev/ckfinder/ckfinder.js') !!}"></script>
+    <script src="<?php echo asset('assets/admin/plugins/ckeditor-dev/ckfinder/ckfinder.js'); ?>"></script>
 
     <script type="text/javascript">
 
-        var baseURL = "{!! url('/') !!}";
+        var baseURL = "<?php echo url('/'); ?>";
 
     </script>
 
-    <script src="{!! asset('assets/admin/plugins/ckeditor-dev/func_ckfinder.js') !!}"></script>
+    <script src="<?php echo asset('assets/admin/plugins/ckeditor-dev/func_ckfinder.js'); ?>"></script>
     <!-- jQuery 2.1.4 -->
-    <script src="{{ asset('assets/admin/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/admin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
@@ -76,25 +76,26 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset(Auth::user()->image) }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                            <img src="<?php echo e(asset(Auth::user()->image)); ?>" class="user-image" alt="User Image">
+                            <span class="hidden-xs"><?php echo e(Auth::user()->name); ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image">
+                                <img src="<?php echo e(asset(Auth::user()->image)); ?>" class="img-circle" alt="User Image">
                                 <p>
-                                    {{ Auth::user()->name }}
+                                    <?php echo e(Auth::user()->name); ?>
+
                                 </p>
                             </li>
                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('backend.profile') }}" class="btn btn-default btn-flat">Thông Tin Tài Khoản</a>
+                                    <a href="<?php echo e(route('backend.profile')); ?>" class="btn btn-default btn-flat">Thông Tin Tài Khoản</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('backend.logout') }}" class="btn btn-default btn-flat">Đăng Xuất</a>
+                                    <a href="<?php echo e(route('backend.logout')); ?>" class="btn btn-default btn-flat">Đăng Xuất</a>
                                 </div>
                             </li>
                         </ul>
@@ -114,10 +115,10 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image">
+                    <img src="<?php echo e(asset(Auth::user()->image)); ?>" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ Auth::user()->name }}</p>
+                    <p><?php echo e(Auth::user()->name); ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -132,14 +133,14 @@
             </form>
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            @include('backend.widget.sidebar_menu')
+            <?php echo $__env->make('backend.widget.sidebar_menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </section>
         <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -317,45 +318,45 @@
 
 
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('assets/admin/dist/js/jquery-ui.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/jquery-ui.min.js')); ?>"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.5 -->
-<script src="{{ asset('assets/admin/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/bootstrap/js/bootstrap.min.js')); ?>"></script>
 <!-- Morris.js charts -->
-<script src="{{ asset('assets/admin/dist/js/raphael-min.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/morris/morris.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/raphael-min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/morris/morris.min.js')); ?>"></script>
 <!-- Sparkline -->
-<script src="{{ asset('assets/admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/sparkline/jquery.sparkline.min.js')); ?>"></script>
 <!-- jvectormap -->
-<script src="{{ asset('assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')); ?>"></script>
 <!-- jQuery Knob Chart -->
-<script src="{{ asset('assets/admin/plugins/knob/jquery.knob.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/knob/jquery.knob.js')); ?>"></script>
 <!-- daterangepicker -->
-<script src="{{ asset('assets/admin/dist/js/moment.min.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/moment.min.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/daterangepicker/daterangepicker.js')); ?>"></script>
 <!-- datepicker -->
-<script src="{{ asset('assets/admin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/datepicker/bootstrap-datepicker.js')); ?>"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="{{ asset('assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')); ?>"></script>
 <!-- Slimscroll -->
-<script src="{{ asset('assets/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/slimScroll/jquery.slimscroll.min.js')); ?>"></script>
 <!-- FastClick -->
-<script src="{{ asset('assets/admin/plugins/fastclick/fastclick.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/fastclick/fastclick.min.js')); ?>"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('assets/admin/dist/js/app.min.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/app.min.js')); ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }}"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/pages/dashboard.js')); ?>"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/admin/dist/js/demo.js') }}"></script>
-@yield('js')
+<script src="<?php echo e(asset('assets/admin/dist/js/demo.js')); ?>"></script>
+<?php echo $__env->yieldContent('js'); ?>
 <!-- Dev -->
-<script src="{{ asset('assets/admin/dist/js/dev.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/chosen/chosen.jquery.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/admin/plugins/chosen/prism.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="<?php echo e(asset('assets/admin/dist/js/dev.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/chosen/chosen.jquery.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('assets/admin/plugins/chosen/prism.js')); ?>" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var config = {
   '.chosen-select'           : {},
