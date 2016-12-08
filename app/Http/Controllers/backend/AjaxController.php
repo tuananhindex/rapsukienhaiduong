@@ -45,10 +45,10 @@ class AjaxController extends Controller
 
     public function add_lang(){
         if(Request::ajax()) {
-
-            $table = $_GET['table'];
-            unset($_GET['table']);
-            $validator = Validator::make($_GET, [
+            $table = $_POST['table'];
+            unset($_POST['table']);
+            unset($_POST['_token']);
+            $validator = Validator::make($_POST, [
                 'name' => 'required'
             ],[
                 'name.required' => 'Bạn chưa nhập tên'
@@ -61,8 +61,9 @@ class AjaxController extends Controller
                 die();
             }
 
-            DB::table($table)->insert($_GET);
+            DB::table($table)->insert($_POST);
             $rs['status'] = 'success';
+            $rs['message'] = 'Thêm ngôn ngữ thành công';
             echo json_encode($rs);
         }
     }

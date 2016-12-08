@@ -40,7 +40,7 @@
                       <label style="margin:0 5px 0 12px;">Ngôn Ngữ</label>
                       <select class="form-control filter_language">
                         @foreach($languages as $val)
-                        <option value="{{ $val->id }}">{{ ucfirst($val->name) }}</option>
+                        <option value="{{ $val->id }}" @if((isset($_GET['lang_id']) && $_GET['lang_id'] == $val->id) || $val->id == $df_lang->id ) selected @endif>{{ ucfirst($val->name) }} @if($val->id == $df_lang->id) - Default @endif</option>
                         @endforeach
                       </select>
                   </div>
@@ -60,7 +60,7 @@
                     <tr>
                       <td><input type="checkbox" class="check_box" name="id[]" value="{{ $val->id }}"></td>
                       <td>@if(file_exists($val->image)) <img src="{{ asset($val->image) }}" width="100"> @endif</td>
-                      <td><a href="<?php echo route($e['route'].'.edit.get',$val->id) ?>">{{ ucfirst($val->name) }}</a></td>
+                      <td><a href="<?php echo route($e['route'].'.edit.get',[$val->id,$val->language]) ?>">{{ ucfirst($val->name) }}</a></td>
                       <td>{{ date('h:i d/m/Y',strtotime($val->create_at)) }}</td>
                       <td>@if(!empty($val->update_at)){{ date('h:i d/m/Y',strtotime($val->update_at)) }}@else Chưa có cập nhật @endif</td>
                       <td>
@@ -71,7 +71,7 @@
                         @endif
                       </td>
                       <td>
-                        <a href="<?php echo route($e['route'].'.edit.get',$val->id) ?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+                        <a href="<?php echo route($e['route'].'.edit.get',[$val->id,$val->language]) ?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
                       </td>
                       <td>
                         <a href="<?php echo route($e['route'].'.delete',$val->id) ?>"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
@@ -94,13 +94,42 @@
 <script type="text/javascript">
   $('select.filter_cat').change(function(){
       var val = $(this).val();
-      if(val == 0){
-        location.href = '{{ route(Route::currentRouteName()) }}';
+      var lang = getUrlParameter('lang_id');
+      if(lang){
+        if(val == 0){
+          location.href = '{{ route(Route::currentRouteName()) }}?lang_id='+lang;
+        }else{
+          location.href = '{{ route(Route::currentRouteName()) }}?lang_id='+lang+'&cat_id='+val;
+        }
       }else{
-        location.href = '{{ route(Route::currentRouteName()) }}?cat_id='+$(this).val();
+        if(val == 0){
+          location.href = '{{ route(Route::currentRouteName()) }}';
+        }else{
+          location.href = '{{ route(Route::currentRouteName()) }}?cat_id='+val;
+        }
       }
       
+      
   });
+
+  $('select.filter_language').change(function(){
+      var val = $(this).val();
+      var cat = getUrlParameter('cat_id');
+      if(cat){
+        if(val == 0){
+          location.href = '{{ route(Route::currentRouteName()) }}?cat_id='+cat;
+        }else{
+          location.href = '{{ route(Route::currentRouteName()) }}?cat_id='+cat+'&lang_id='+val;
+        }
+      }else{
+        if(val == 0){
+          location.href = '{{ route(Route::currentRouteName()) }}';
+        }else{
+          location.href = '{{ route(Route::currentRouteName()) }}?lang_id='+val;
+        }
+      }
+  });
+  
 </script>
 <!-- /.content -->
 @endsection

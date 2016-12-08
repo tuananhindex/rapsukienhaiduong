@@ -113,7 +113,7 @@ Route::group(['middleware' => ['web']], function () {
 					Route::get('add',['as' => 'backend.posts.posts.add.get' , 'uses' => 'backend\posts\PostsController@add_get']);
 					Route::post('add',['as' => 'backend.posts.posts.add.post' , 'uses' => 'backend\posts\PostsController@add_post']);
 					Route::get('edit/{id}/{lang?}',['as' => 'backend.posts.posts.edit.get' , 'uses' => 'backend\posts\PostsController@edit_get']);
-					Route::post('edit/{id}',['as' => 'backend.posts.posts.edit.post' , 'uses' => 'backend\posts\PostsController@edit_post']);
+					Route::post('edit/{id}/{lang?}',['as' => 'backend.posts.posts.edit.post' , 'uses' => 'backend\posts\PostsController@edit_post']);
 					Route::get('{key?}',['as' => 'backend.posts.posts.list.get' , 'uses' => 'backend\posts\PostsController@list_get']);
 					Route::post('/',['as' => 'backend.posts.posts.list.post' , 'uses' => 'backend\posts\PostsController@list_post']);
 					Route::get('delete/{id}',['as' => 'backend.posts.posts.delete' , 'uses' => 'backend\posts\PostsController@delete']);
@@ -204,7 +204,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	    	Route::group(['prefix' => 'ajax'],function(){
 	    		Route::get('get_data_cursor',['as' => 'get_data_cursor' , 'uses' => 'backend\AjaxController@get_data_cursor']);
-	    		Route::get('add_lang',['as' => 'add_lang' , 'uses' => 'backend\AjaxController@add_lang']);
+	    		Route::post('add_lang',['as' => 'add_lang' , 'uses' => 'backend\AjaxController@add_lang']);
 	    	});
 	    });
     });

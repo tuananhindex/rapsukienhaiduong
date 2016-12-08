@@ -190,8 +190,8 @@ class ProductController extends Controller
     }
 
     public function delete($id){
-    // DB::table($this->e['table'])->where('id',$id)->delete();
-     //    return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
-        return redirect()->back();
+    DB::table($this->e['table'])->where('id',$id)->delete();
+        return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
+        //return redirect()->back();
     }
 }

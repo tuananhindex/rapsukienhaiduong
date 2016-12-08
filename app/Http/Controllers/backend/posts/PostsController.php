@@ -109,7 +109,7 @@ class PostsController extends Controller
             $lang = $this->df_lang->id;
         }
         $cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
-        $index = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where([$this->e['table'].'.id' => $id ,'language' => $lang])->first();
+        $index = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where([$this->e['table'].'.id' => $id ,'language' => $lang])->select('*',$this->e['table'].'.id as id')->first();
         $this->e['action'] = ucfirst($index->name);
         $MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_catid);
         $posts = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $index->language])->select('name','alias')->get();
@@ -123,14 +123,23 @@ class PostsController extends Controller
             $common_id[] = $value->language;
         }
         $languages = DB::table('language')->whereNotIn('id',$common_id)->where('status',1)->get();
+        $languages2 = DB::table('language')->whereIn('id',$common_id)->where('status',1)->get();
 
-        $posts_lang = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $languages[0]->id])->select('name','alias')->get();
+        $posts_lang = '';
+        if($languages){
+            $posts_lang = DB::table($this->e['table'])->join($this->e['table'].'_common','fk_commonid','=',$this->e['table'].'_common.id')->where(['status' => 1 ,'language' => $languages[0]->id])->select('name','alias')->get();
+        }
+        
 
-        return view($this->e['view'].'.edit',compact('index','posts_lang','cats','MultiLevelSelect','posts','tags','languages'))->with(['e' => $this->e]);
+        return view($this->e['view'].'.edit',compact('index','posts_lang','cats','MultiLevelSelect','posts','tags','languages','languages2'))->with(['e' => $this->e]);
     }
 
-    public function edit_post(Request $req,$id){
+    public function edit_post(Request $req,$id,$lang = ''){
         Cache::flush();
+        if(empty($lang)){
+            $lang = $this->df_lang->id;
+        }
+
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'alias' => 'required',
@@ -146,8 +155,8 @@ class PostsController extends Controller
             return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
 
-        $index = DB::table($this->e['table'])->where('id',$id);
-        $common = DB::table($this->e['table'].'_common')->where('id',$index->first()->fk_commonid)->first();
+        $index = DB::table($this->e['table'])->where(['id' => $id,'language' => $lang]);
+        $common = DB::table($this->e['table'].'_common')->where('id',$lang)->first();
 
         $data_private['name'] = $req->name;
         $data_private['description'] = $req->description;
@@ -187,7 +196,7 @@ class PostsController extends Controller
 
         $index->update($data_private);
         if($req->save){
-            return redirect(route($this->e['route'].'.edit.get',$id))->with('alert',AdminHelper::alert_admin('success','fa-check','cập nhật thành công'));
+            return redirect(route($this->e['route'].'.edit.get',[$id,$index->first()->language]))->with('alert',AdminHelper::alert_admin('success','fa-check','cập nhật thành công'));
         }else{
             return redirect(route($this->e['route'].'.list.get'))->with('alert',AdminHelper::alert_admin('success','fa-check','cập nhật thành công'));
         }
@@ -211,7 +220,12 @@ class PostsController extends Controller
         if(Input::has('cat_id')){
             $data = $data->where('fk_catid',Input::get('cat_id'));
         }
-        $data = $data->select('*',$this->e['table'].'.id as id')->paginate(10);
+        if(Input::has('lang_id')){
+            $data = $data->where('language',Input::get('lang_id'));
+        }else{
+            $data = $data->where('language',$this->df_lang->id);
+        }
+        $data = $data->select('image','name','create_at','update_at','status','language',$this->e['table'].'.id as id')->paginate(10);
         return view($this->e['view'].'.list',compact('data','MultiLevelSelect','languages'), [
             'data' => $data->appends(Input::except('page'))
         ])->with(['e' => $this->e]);
