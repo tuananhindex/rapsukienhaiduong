@@ -99,9 +99,14 @@ class ProfileController extends Controller
 	    		unlink($index->first()->image);
 	    	}
     		$image = $req->file('image');
-	    	$image_name = time().'.'.$image->getClientOriginalExtension();
-	    	$image->move('upload',$image_name);
-	    	$data['image'] = 'upload/'.$image_name;
+            $image_name = $image->getClientOriginalName();
+            // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
+            if(file_exists('upload/profile/'.$image_name)){
+                return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
+            }
+            // end
+            $image->move('upload/profile',$image_name);
+            $data['image'] = 'upload/profile/'.$image_name;
     	}
     	$index->update($data);
     	return redirect(route($this->e['route']))->with('alert',Helper::alert_admin('success','fa-check','Cập nhật ảnh thành công'));

@@ -35,43 +35,58 @@
 						</div>
 						<div class="form-group">
 						  <label>Đường Dẫn Ảo</label>
-						  <input type="text" class="form-control add-alias" name="alias" placeholder="Nhập đường dẫn ảo" required="">
+						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" required="">
 						</div>
 						<div class="form-group">
-						  <label>Ảnh</label>
-						  <input type="file" name="image[]" multiple="">
+						  <label>Ảnh đại diện</label>
+						  <input type="file" name="image">
 						</div>
 						<div class="form-group">
-						  	<label>Danh Mục</label>
-						  	<select class="form-control" name="fk_catid">
+						  	<label>Thành Phần Cha</label>
+						  	<select class="form-control" name="fk_parentid">
 								<option value="0">Không</option>
 								<?php echo $MultiLevelSelect; ?>
 
 							</select>
 						</div>
 						<div class="form-group">
-						  <label>Giá</label>
-						  <input type="number" class="form-control" name="price" placeholder="Nhập giá tiền">
+						  	<label>Trỏ đến</label>
+						  	<select class="form-control cursor" name="cursor">
+						  		<option value="">Không</option>
+						  		<option value="posts">Bài viết</option>
+						  		<option value="posts_category">Danh mục bài viết</option>
+						  		<option value="product">Sản phẩm</option>
+						  		<option value="product_category">Danh mục sản phẩm</option>
+						  	</select>
 						</div>
-						<div class="form-group">
-						  <label>Khuyến mãi (%)</label>
-						  <input type="number" class="form-control" name="promotion" placeholder="Nhập khuyến mãi">
+						<div class="data-cursor">
+							
 						</div>
 						<div class="form-group">
 						  <label>Thứ Tự</label>
 						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
 						</div>
 						<div class="form-group">
+							<label>Hiển thị ở menu header</label>
+							<select class="form-control" name="menu_header">
+								<option value="0">Không</option>
+								<option value="1">Có</option>
+								
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Hiển thị ở menu footer</label>
+							<select class="form-control" name="menu_footer">
+								<option value="0">Không</option>
+								<option value="1">Có</option>
+								
+							</select>
+						</div>
+						<div class="form-group">
 						  <label>Mô tả</label>
 						  <textarea class="form-control" name="description" id="description"></textarea>
-						  
 						</div>
-
-						<div class="form-group">
-						  <label>Nội dung</label>
-						  <textarea class="form-control" name="content"></textarea>
-						  <script type="text/javascript">ckeditor('content')</script>
-						</div>
+						
 						
 						<div class="form-group">
 						  <label>Meta Title</label>

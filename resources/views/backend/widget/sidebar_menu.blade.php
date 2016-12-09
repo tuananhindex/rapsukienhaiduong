@@ -49,6 +49,26 @@
                     <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.product.list.get')) > 0) active @endif"><a href="{{ route('backend.product.product.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
                 </ul>
             </li>
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.producer')) > 0) active @endif treeview">
+                <a href="#"><i class="fa fa-tags"></i> Nhà Sản Xuất <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.producer.add.get')) > 0) active @endif">
+                        <a href="{{ route('backend.product.producer.add.get') }}"><i class="fa fa-plus"></i> Thêm</a>
+                        
+                    </li>
+                    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.producer.list.get')) > 0) active @endif"><a href="{{ route('backend.product.producer.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
+                </ul>
+            </li>
+            <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.color')) > 0) active @endif treeview">
+                <a href="#"><i class="fa fa-tags"></i> Màu <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.color.add.get')) > 0) active @endif">
+                        <a href="{{ route('backend.product.color.add.get') }}"><i class="fa fa-plus"></i> Thêm</a>
+                        
+                    </li>
+                    <li class="@if(strlen(strstr(Route::currentRouteName(), 'backend.product.color.list.get')) > 0) active @endif"><a href="{{ route('backend.product.color.list.get') }}"><i class="fa fa-list"></i> Danh Sách</a></li>
+                </ul>
+            </li>
         </ul>
     </li>
 

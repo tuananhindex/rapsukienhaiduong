@@ -23,6 +23,9 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 				  	<h3 class="box-title">{{ ucwords($e['action']) }}</h3>
+
+				  	<a href="<?php echo route($e['route'].'.add.get') ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Thêm Mới</a>
+				  	
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form method="post" enctype="multipart/form-data">
@@ -30,50 +33,26 @@
 					<div class="box-body">
 						<div class="form-group">
 						  <label>Tên</label>
-						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" required="">
-						</div>
-						<div class="form-group">
-						  <label>Đường Dẫn Ảo</label>
-						  <input type="text" class="form-control add-alias" name="alias" placeholder="Nhập đường dẫn ảo" required="">
-						</div>
-						<div class="form-group">
-						  <label>Ảnh đại diện</label>
-						  <input type="file" name="image">
-						</div>
-						<div class="form-group">
-						  	<label>Thành Phần Cha</label>
-						  	<select class="form-control" name="fk_parentid">
-								<option value="0">Không</option>
-								{!! $MultiLevelSelect !!}
-							</select>
-						</div>
-						<div class="form-group">
-						  <label>Thứ Tự</label>
-						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
-						</div>
-						<div class="form-group">
-						  <label>Mô tả</label>
-						  <textarea class="form-control" name="description" id="description"></textarea>
-						  
+						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="{{ $index->name }}" required="">
 						</div>
 						
 						<div class="form-group">
-						  <label>Meta Title</label>
-						  <input type="text" class="form-control" name="meta_title">
+						  <label>Thứ Tự</label>
+						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" value="{{ $index->order }}" >
 						</div>
-						<div class="form-group">
-						  <label>Meta Description</label>
-						  <textarea class="form-control" name="meta_description"></textarea>
-						</div>
-						<div class="form-group">
-						  <label>Meta Keywords</label>
-						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,...">
-						</div>
+						
+						
+						
 						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
+								@if($index->status == 1)
 								<option value="1">Hiển Thị</option>
 								<option value="0">Không Hiển Thị</option>
+								@else
+								<option value="0">Không Hiển Thị</option>
+								<option value="1">Hiển Thị</option>
+								@endif
 							</select>
 						</div>
 						
@@ -81,7 +60,8 @@
 
 					<div class="box-footer">
 						<input type="submit" class="btn btn-primary" name="save" value="Lưu">
-						<input type="submit" class="btn btn-success" name="save&add" value="Lưu & Thêm Mới">
+						<input type="submit" class="btn btn-success" name="save&add" value="Lưu & Trở về trang danh sách">
+
 					</div>
 				</form>
 			</div>

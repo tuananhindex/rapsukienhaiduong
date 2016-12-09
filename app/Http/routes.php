@@ -38,6 +38,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('bai-viet/{alias}',['as' => 'posts' , 'uses' => 'frontend\PageController@posts']);
 	Route::get('danh-muc-bai-viet/{alias}/{view?}',['as' => 'posts.category' , 'uses' => 'frontend\PageController@posts_category']);
 
+	Route::get('hang-san-xuat/{alias}',['as' => 'producer' , 'uses' => 'frontend\PageController@producer']);
+
 	Route::get('thu-vien-anh',['as' => 'img.lib' , 'uses' => 'frontend\PageController@img_lib']);
 
 	Route::get('y-kien-khach-hang',['as' => 'customer_reviews' , 'uses' => 'frontend\PageController@customer_reviews']);
@@ -95,6 +97,28 @@ Route::group(['middleware' => ['web']], function () {
 					Route::get('{key?}',['as' => 'backend.product.product.list.get' , 'uses' => 'backend\product\ProductController@list_get']);
 					Route::post('/',['as' => 'backend.product.product.list.post' , 'uses' => 'backend\product\ProductController@list_post']);
 					Route::get('delete/{id}',['as' => 'backend.product.product.delete' , 'uses' => 'backend\product\ProductController@delete']);
+					Route::get('delete_img/{id}',['as' => 'backend.product.product.delete_img' , 'uses' => 'backend\product\ProductController@delete_img']);
+					Route::get('pk_img/{id}',['as' => 'backend.product.product.pk_img' , 'uses' => 'backend\product\ProductController@pk_img']);
+		    	});
+
+		    	Route::group(['prefix' => 'producer'],function(){
+					Route::get('add',['as' => 'backend.product.producer.add.get' , 'uses' => 'backend\product\ProducerController@add_get']);
+					Route::post('add',['as' => 'backend.product.producer.add.post' , 'uses' => 'backend\product\ProducerController@add_post']);
+					Route::get('edit/{id}',['as' => 'backend.product.producer.edit.get' , 'uses' => 'backend\product\ProducerController@edit_get']);
+					Route::post('edit/{id}',['as' => 'backend.product.producer.edit.post' , 'uses' => 'backend\product\ProducerController@edit_post']);
+					Route::get('{key?}',['as' => 'backend.product.producer.list.get' , 'uses' => 'backend\product\ProducerController@list_get']);
+					Route::post('/',['as' => 'backend.product.producer.list.post' , 'uses' => 'backend\product\ProducerController@list_post']);
+					Route::get('delete/{id}',['as' => 'backend.product.producer.delete' , 'uses' => 'backend\product\ProducerController@delete']);
+		    	});
+
+		    	Route::group(['prefix' => 'color'],function(){
+					Route::get('add',['as' => 'backend.product.color.add.get' , 'uses' => 'backend\product\ColorController@add_get']);
+					Route::post('add',['as' => 'backend.product.color.add.post' , 'uses' => 'backend\product\ColorController@add_post']);
+					Route::get('edit/{id}',['as' => 'backend.product.color.edit.get' , 'uses' => 'backend\product\ColorController@edit_get']);
+					Route::post('edit/{id}',['as' => 'backend.product.color.edit.post' , 'uses' => 'backend\product\ColorController@edit_post']);
+					Route::get('{key?}',['as' => 'backend.product.color.list.get' , 'uses' => 'backend\product\ColorController@list_get']);
+					Route::post('/',['as' => 'backend.product.color.list.post' , 'uses' => 'backend\product\ColorController@list_post']);
+					Route::get('delete/{id}',['as' => 'backend.product.color.delete' , 'uses' => 'backend\product\ColorController@delete']);
 		    	});
 		    });
 
@@ -190,6 +214,8 @@ Route::group(['middleware' => ['web']], function () {
 				Route::get('delete/{id}',['as' => 'backend.language.delete' , 'uses' => 'backend\LanguageController@delete']);
 	    	});
 
+	    	
+
 	    	Route::group(['prefix' => 'profile'],function(){
 				Route::get('/',['as' => 'backend.profile' , 'uses' => 'backend\ProfileController@index']);
 				Route::post('edit',['as' => 'backend.profile.edit' , 'uses' => 'backend\ProfileController@edit']);
@@ -205,6 +231,7 @@ Route::group(['middleware' => ['web']], function () {
 	    	Route::group(['prefix' => 'ajax'],function(){
 	    		Route::get('get_data_cursor',['as' => 'get_data_cursor' , 'uses' => 'backend\AjaxController@get_data_cursor']);
 	    		Route::post('add_lang',['as' => 'add_lang' , 'uses' => 'backend\AjaxController@add_lang']);
+	    		Route::post('add_attr_product',['as' => 'add_attr_product' , 'uses' => 'backend\AjaxController@add_attr_product']);
 	    	});
 	    });
     });

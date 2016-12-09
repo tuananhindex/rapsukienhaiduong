@@ -67,4 +67,10 @@ class AjaxController extends Controller
             echo json_encode($rs);
         }
     }
+
+    public function add_attr_product(){
+        if(Request::ajax()) {
+            echo 123;
+        }
+    }
 }

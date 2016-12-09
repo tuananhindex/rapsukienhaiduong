@@ -24,6 +24,11 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 				  	<h3 class="box-title"><?php echo e(ucwords($e['action'])); ?></h3>
+
+				  	<a href="<?php echo route($e['route'].'.add.get') ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Thêm Mới</a>
+				  	<?php if($index->status == 1): ?>
+				  	<a href="<?php echo route($e['frontend_route'],$index->alias) ?>" target="_blank" class="btn btn-warning pull-right" style="margin-right:5px"><i class="fa fa-eye"></i> Xem</a>
+				  	<?php endif; ?>
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form method="post" enctype="multipart/form-data">
@@ -31,65 +36,62 @@
 					<div class="box-body">
 						<div class="form-group">
 						  <label>Tên</label>
-						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" required="">
+						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo e($index->name); ?>" required="">
 						</div>
 						<div class="form-group">
 						  <label>Đường Dẫn Ảo</label>
-						  <input type="text" class="form-control add-alias" name="alias" placeholder="Nhập đường dẫn ảo" required="">
+						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" value="<?php echo e($index->alias); ?>" required="">
 						</div>
 						<div class="form-group">
-						  <label>Ảnh</label>
-						  <input type="file" name="image[]" multiple="">
+						  <label>Ảnh đại diện</label>
+						  <input type="file" name="image">
 						</div>
 						<div class="form-group">
-						  	<label>Danh Mục</label>
-						  	<select class="form-control" name="fk_catid">
+							<img src="<?php echo e(asset($index->image)); ?>" width="200">
+						</div>
+						<div class="form-group">
+						  	<label>Thành Phần Cha</label>
+						  	<select class="form-control" name="fk_parentid">
 								<option value="0">Không</option>
 								<?php echo $MultiLevelSelect; ?>
 
 							</select>
 						</div>
-						<div class="form-group">
-						  <label>Giá</label>
-						  <input type="number" class="form-control" name="price" placeholder="Nhập giá tiền">
-						</div>
-						<div class="form-group">
-						  <label>Khuyến mãi (%)</label>
-						  <input type="number" class="form-control" name="promotion" placeholder="Nhập khuyến mãi">
-						</div>
+						
 						<div class="form-group">
 						  <label>Thứ Tự</label>
-						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
+						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" value="<?php echo e($index->order); ?>" >
 						</div>
+						
 						<div class="form-group">
 						  <label>Mô tả</label>
-						  <textarea class="form-control" name="description" id="description"></textarea>
+						  <textarea class="form-control" name="description" id="description"><?php echo $index->description; ?></textarea>
 						  
-						</div>
-
-						<div class="form-group">
-						  <label>Nội dung</label>
-						  <textarea class="form-control" name="content"></textarea>
-						  <script type="text/javascript">ckeditor('content')</script>
 						</div>
 						
 						<div class="form-group">
 						  <label>Meta Title</label>
-						  <input type="text" class="form-control" name="meta_title">
+						  <input type="text" class="form-control" name="meta_title" value="<?php echo e($index->meta_title); ?>">
 						</div>
 						<div class="form-group">
 						  <label>Meta Description</label>
-						  <textarea class="form-control" name="meta_description"></textarea>
+						  <textarea class="form-control" name="meta_description"><?php echo e($index->meta_description); ?></textarea>
 						</div>
 						<div class="form-group">
 						  <label>Meta Keywords</label>
-						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,...">
+						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,..." value="<?php echo e($index->meta_keywords); ?>">
 						</div>
+						
 						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
+								<?php if($index->status == 1): ?>
 								<option value="1">Hiển Thị</option>
 								<option value="0">Không Hiển Thị</option>
+								<?php else: ?>
+								<option value="0">Không Hiển Thị</option>
+								<option value="1">Hiển Thị</option>
+								<?php endif; ?>
 							</select>
 						</div>
 						
@@ -97,7 +99,8 @@
 
 					<div class="box-footer">
 						<input type="submit" class="btn btn-primary" name="save" value="Lưu">
-						<input type="submit" class="btn btn-success" name="save&add" value="Lưu & Thêm Mới">
+						<input type="submit" class="btn btn-success" name="save&add" value="Lưu & Trở về trang danh sách">
+
 					</div>
 				</form>
 			</div>

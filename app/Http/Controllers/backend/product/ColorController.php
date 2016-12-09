@@ -13,13 +13,13 @@ use Validator;
 use Session;
 use Cache;
 
-class CategoryController extends Controller
+class ColorController extends Controller
 {
 	private $e = [
-					'view' => 'backend.product.category',
-					'route' => 'backend.product.category',
-					'module' => 'danh mục sản phẩm',
-					'table' => 'product_category'
+					'view' => 'backend.product.color',
+					'route' => 'backend.product.color',
+                    'module' => 'màu sắc',
+					'table' => 'product_color'
 				];
 	public function __construct(){
 		View::share('e',$this->e);
@@ -27,52 +27,28 @@ class CategoryController extends Controller
 
     public function add_get(){
     	$this->e['action'] = 'Thêm';
-    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->get();
-    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
+    	$tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
 
-    	return view($this->e['view'].'.add',compact('cats','MultiLevelSelect'))->with(['e' => $this->e]);
+    	return view($this->e['view'].'.add',compact('cats','tags'))->with(['e' => $this->e]);
     }
 
     public function add_post(Request $req){
         Cache::flush();
+        //return dd($req->all());
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required',
-            'image' => 'image|max:1000'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
-        	'image.image' => 'File tải lên phải là ảnh',
-        	'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
         ]);
         $error = $validator->errors()->first();
         if($error){
         	return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
         
-
-    	$data['name'] = $req->name;
-    	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias);
-
-    	if($req->file('image')){
-    		$image = $req->file('image');
-            $image_name = $image->getClientOriginalName();
-            // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
-            if(file_exists('upload/product_category/'.$image_name)){
-                return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
-            }
-            // end
-            $image->move('upload/product_category',$image_name);
-            $data['image'] = 'upload/product_category/'.$image_name;
-    	}
+        $data['name'] = $req->name;
     	
-
-    	$data['fk_parentid'] = $req->fk_parentid;
     	$data['order'] = $req->order;
-    	$data['description'] = $req->description;
-    	$data['meta_title'] = $req->meta_title;
-    	$data['meta_description'] = $req->meta_description;
-    	$data['meta_keywords'] = $req->meta_keywords;
+    	
     	$data['status'] = $req->status;
     	$data['create_at'] = date('Y-m-d H:i:s');
     	
@@ -87,25 +63,18 @@ class CategoryController extends Controller
 
     public function edit_get($id){
     	
-    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->whereNotIn('id',[$id])->get();
     	$index = DB::table($this->e['table'])->where('id',$id)->first();
     	$this->e['action'] = ucfirst($index->name);
-    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_parentid);
-
-    	return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect'))->with(['e' => $this->e]);
+    	
+    	return view($this->e['view'].'.edit',compact('index','cats'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){
         Cache::flush();
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
-            'alias' => 'required',
-            'image' => 'image|max:1000'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
-        	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
-        	'image.image' => 'File tải lên phải là ảnh',
-        	'image.max' => 'Ảnh tải lên vượt quá dung lượng cho phép'
         ]);
         $error = $validator->errors()->first();
         if($error){
@@ -116,30 +85,9 @@ class CategoryController extends Controller
         
 
     	$data['name'] = $req->name;
-    	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias,$index->first()->id);
-
     	
-    	if($req->file('image')){
-    		if(file_exists($index->first()->image)){
-	    		unlink($index->first()->image);
-	    	}
-    		$image = $req->file('image');
-            $image_name = $image->getClientOriginalName();
-            // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
-            if(file_exists('upload/product_category/'.$image_name)){
-                return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
-            }
-            // end
-            $image->move('upload/product_category',$image_name);
-            $data['image'] = 'upload/product_category/'.$image_name;
-    	}
-
-    	$data['fk_parentid'] = $req->fk_parentid;
     	$data['order'] = $req->order;
-    	$data['description'] = $req->description;
-    	$data['meta_title'] = $req->meta_title;
-    	$data['meta_description'] = $req->meta_description;
-    	$data['meta_keywords'] = $req->meta_keywords;
+    	
     	$data['status'] = $req->status;
     	$data['update_at'] = date('Y-m-d H:i:s');
     	
@@ -192,8 +140,8 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
-    	DB::table($this->e['table'])->where('id',$id)->delete();
-        return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
-        //return redirect()->back();
+        // DB::table($this->e['table'])->where('id',$id)->delete();
+     //    return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
+        return redirect()->back();
     }
 }

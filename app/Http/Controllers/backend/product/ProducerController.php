@@ -13,13 +13,14 @@ use Validator;
 use Session;
 use Cache;
 
-class ProductController extends Controller
+class ProducerController extends Controller
 {
 	private $e = [
-					'view' => 'backend.product.product',
-					'route' => 'backend.product.product',
-					'module' => 'sản phẩm',
-					'table' => 'product'
+					'view' => 'backend.product.producer',
+					'route' => 'backend.product.producer',
+                    'frontend_route' => 'producer',
+					'module' => 'hãng sản xuất',
+					'table' => 'product_producer'
 				];
 	public function __construct(){
 		View::share('e',$this->e);
@@ -27,18 +28,20 @@ class ProductController extends Controller
 
     public function add_get(){
     	$this->e['action'] = 'Thêm';
-    	$cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
+    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->get();
     	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats);
+        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
 
-    	return view($this->e['view'].'.add',compact('cats','MultiLevelSelect'))->with(['e' => $this->e]);
+    	return view($this->e['view'].'.add',compact('cats','MultiLevelSelect','tags'))->with(['e' => $this->e]);
     }
 
     public function add_post(Request $req){
         Cache::flush();
+        //return dd($req->all());
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
             'alias' => 'required',
-            'image.*' => 'image|max:1000'
+            'image' => 'image|max:1000'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
         	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
@@ -50,20 +53,25 @@ class ProductController extends Controller
         	return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban',$error));
         }
         
-
-    	$data['name'] = $req->name;
-        $data['link'] = $req->link;
+        $data['name'] = $req->name;
     	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias);
 
-
-        $data['isRest'] = $req->isRest;
-    	$data['fk_catid'] = $req->fk_catid;
-    	$data['promotion'] = $req->promotion;
-        $data['price'] = $req->price;
-        $data['order'] = $req->order;
+    	if($req->file('image')){
+            $image = $req->file('image');
+            $image_name = $image->getClientOriginalName();
+            // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
+            if(file_exists('upload/producer/'.$image_name)){
+                return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
+            }
+            // end
+	    	$image->move('upload/producer',$image_name);
+	    	$data['image'] = 'upload/producer/'.$image_name;
+    	}
+    	
+        $data['fk_parentid'] = $req->fk_parentid;
+    	$data['order'] = $req->order;
     	$data['description'] = $req->description;
-        $data['content'] = $req->content;
-    	$data['meta_title'] = $req->meta_title;
+        $data['meta_title'] = $req->meta_title;
     	$data['meta_description'] = $req->meta_description;
     	$data['meta_keywords'] = $req->meta_keywords;
     	$data['status'] = $req->status;
@@ -71,33 +79,6 @@ class ProductController extends Controller
     	
 
     	$id = DB::table($this->e['table'])->insertGetId($data);
-        if($req->file('image')){
-            $image_data = [];
-            foreach ($req->file('image') as $key => $image) {
-                if($image){
-                    $image_name = $image->getClientOriginalName();
-                    // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
-                    if(file_exists('upload/product/'.$image_name)){
-                        return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
-                    }
-                    // end
-                    $image->move('upload/product',$image_name);
-                    $image_data[$key]['image'] = 'upload/product/'.$image_name;
-                    $image_data[$key]['fk_productid'] = $id;
-                    $image_data[$key]['create_at'] = date('Y-m-d H:i:s');
-                    $image_data[$key]['isMain'] = 0;
-                    if($key == 0){
-                        $image_data[$key]['isMain'] = 1;
-                        DB::table($this->e['table'])->where('id',$id)->update(['image' => $image_data[$key]['image']]);
-                    }
-                }
-            }
-            if($image_data){
-                DB::table($this->e['table'].'_img')->insert($image_data);
-            }
-            
-        }
-        
     	if($req->save){
     		return redirect(route($this->e['route'].'.edit.get',$id))->with('alert',AdminHelper::alert_admin('success','fa-check','thêm thành công'));
     	}else{
@@ -107,16 +88,13 @@ class ProductController extends Controller
 
     public function edit_get($id){
     	
-    	$cats = DB::table($this->e['table'].'_category')->select('id','name','fk_parentid')->get();
+    	$cats = DB::table($this->e['table'])->select('id','name','fk_parentid')->whereNotIn('id',[$id])->get();
     	$index = DB::table($this->e['table'])->where('id',$id)->first();
-        // Lấy danh sách ảnh
-        $images = DB::table($this->e['table'].'_img')->where('fk_productid',$id)->select('id','image','isMain')->get();
-        // end
-        $colors = DB::table($this->e['table'].'_color')->select('id','name')->get();
     	$this->e['action'] = ucfirst($index->name);
-    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_catid);
+    	$MultiLevelSelect = AdminHelper::MultiLevelSelect($cats,0,'',$index->fk_parentid);
+        $tags = DB::table('tag')->where('status',1)->select('id','name','alias')->get();
 
-    	return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','images','colors'))->with(['e' => $this->e]);
+    	return view($this->e['view'].'.edit',compact('index','cats','MultiLevelSelect','tags'))->with(['e' => $this->e]);
     }
 
     public function edit_post(Request $req,$id){
@@ -124,7 +102,7 @@ class ProductController extends Controller
     	$validator = Validator::make($req->all(), [
             'name' => 'required',
             'alias' => 'required',
-            'image.*' => 'image|max:1000'
+            'image' => 'image|max:1000'
         ],[
         	'name.required' => 'Bạn chưa nhập tên',
         	'alias.required' => 'Bạn chưa nhập đường dẫn ảo',
@@ -140,44 +118,31 @@ class ProductController extends Controller
         
 
     	$data['name'] = $req->name;
-        $data['link'] = $req->link;
     	$data['alias'] = AdminHelper::check_alias($this->e['table'],$req->alias,$index->first()->id);
 
     	
     	if($req->file('image')){
-            $image_data = [];
-            foreach ($req->file('image') as $key => $image) {
-                if($image){
-                    $image_name = $image->getClientOriginalName();
-                    // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
-                    if(file_exists('upload/product/'.$image_name)){
-                        return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
-                    }
-                    // end
-                    $image->move('upload/product',$image_name);
-                    $image_data[$key]['image'] = 'upload/product/'.$image_name;
-                    $image_data[$key]['fk_productid'] = $id;
-                    $image_data[$key]['create_at'] = date('Y-m-d H:i:s');
-                }
+    		if(file_exists($index->first()->image)){
+	    		unlink($index->first()->image);
+	    	}
+    		$image = $req->file('image');
+            $image_name = $image->getClientOriginalName();
+            // Kiểm tra tên file đã tồn tại trong folder upload hay chưa
+            if(file_exists('upload/producer/'.$image_name)){
+                return redirect()->back()->with('alert',AdminHelper::alert_admin('danger','fa-ban','Ảnh đã tồn tại . Bạn vui lòng đổi tên ảnh'));
             }
+            // end
+            $image->move('upload',$image_name);
+            $data['image'] = 'upload/producer/'.$image_name;
+    	}
 
-            if($image_data){
-                DB::table($this->e['table'].'_img')->insert($image_data);
-            }
-            
-        }
-
-        $data['isRest'] = $req->isRest;
-    	$data['fk_catid'] = $req->fk_catid;
-        $data['promotion'] = $req->promotion;
-        $data['price'] = $req->price;
-        $data['order'] = $req->order;
-        $data['description'] = $req->description;
-        $data['content'] = $req->content;
+        $data['fk_parentid'] = $req->fk_parentid;
+    	$data['order'] = $req->order;
+    	$data['description'] = $req->description;
         $data['meta_title'] = $req->meta_title;
-        $data['meta_description'] = $req->meta_description;
-        $data['meta_keywords'] = $req->meta_keywords;
-        $data['status'] = $req->status;
+    	$data['meta_description'] = $req->meta_description;
+    	$data['meta_keywords'] = $req->meta_keywords;
+    	$data['status'] = $req->status;
     	$data['update_at'] = date('Y-m-d H:i:s');
     	
 
@@ -230,25 +195,7 @@ class ProductController extends Controller
 
     public function delete($id){
         // DB::table($this->e['table'])->where('id',$id)->delete();
-        // return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
-        //return redirect()->back();
-    }
-
-    public function delete_img($id){
-        $index = DB::table($this->e['table'].'_img')->where('id',$id);
-        if(file_exists($index->first()->image)){
-            unlink($index->first()->image);
-        }
-        $index->delete();
-        return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa ảnh thành công')]);
-        //return redirect()->back();
-    }
-
-    public function pk_img($id){
-        $index = DB::table($this->e['table'].'_img')->where('id',$id);
-        DB::table($this->e['table'].'_img')->where('fk_productid',$index->first()->fk_productid)->update(['isMain' => 0]);
-        $index->update(['isMain' => 1]);
-        $product = DB::table($this->e['table'])->where('id',$index->first()->fk_productid)->update(['image' => $index->first()->image]);
-        return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Đặt ảnh mặc định thành công')]);
+     //    return redirect()->back()->with(['alert' => AdminHelper::alert_admin('success','fa-check','Xóa thành công')]);
+        return redirect()->back();
     }
 }

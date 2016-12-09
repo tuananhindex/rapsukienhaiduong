@@ -25,18 +25,20 @@
 				<div class="box-header with-border">
 				  	<h3 class="box-title"><?php echo e(ucwords($e['action'])); ?></h3>
 				  	<a href="<?php echo route($e['route'].'.add.get') ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Thêm Mới</a>
+				  	<button type="button" class="btn btn-success pull-right btn-add-lang" style="margin-right:5px"  data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Thêm Đặc Tính</button>
 				</div><!-- /.box-header -->
 				<!-- form start -->
 				<form method="post" enctype="multipart/form-data">
 					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 					<div class="box-body">
 						<div class="form-group">
-						  <label>Tên</label>
-						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo e($index->name); ?>" required="">
+							<label>Hàng Tồn</label><br>
+							<label class="radio-inline"><input type="radio" name="isRest" value="1" <?php if($index->isRest == 1): ?> checked <?php endif; ?>>Có</label>
+							<label class="radio-inline"><input type="radio" name="isRest" value="0" <?php if($index->isRest == 0): ?> checked <?php endif; ?>>Không</label>
 						</div>
 						<div class="form-group">
-						  <label>Link</label>
-						  <input type="text" class="form-control" name="link" placeholder="Nhập link" value="<?php echo e($index->link); ?>" >
+						  <label>Tên</label>
+						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo e($index->name); ?>" required="">
 						</div>
 						<div class="form-group">
 						  <label>Đường Dẫn Ảo</label>
@@ -44,11 +46,20 @@
 						</div>
 						<div class="form-group">
 						  <label>Ảnh đại diện</label>
-						  <input type="file" name="image">
+						  <input type="file" name="image[]" multiple="">
 						</div>
-						<div class="form-group">
-							<img src="<?php echo e(asset($index->image)); ?>" width="200">
+						
+						<?php if(isset($images) && count($images) > 0): ?>
+						<div class="row">
+							<?php foreach($images as $val): ?>
+							<div class="col-xs-6 col-sm-4 col-sm-3 col-lg-2" style="display: block;">
+								<input <?php if($val->isMain == 1): ?> checked <?php endif; ?> type="radio" name="pk_img" value="<?php echo e($val->id); ?>">
+								<a href="<?php echo e(route('backend.product.product.delete_img',$val->id)); ?>" class="delete_img"><img style="margin-right: 10px" src="<?php echo e(asset($val->image)); ?>" width="100%"></a>
+
+							</div>
+							<?php endforeach; ?>
 						</div>
+						<?php endif; ?>
 						<div class="form-group">
 						  	<label>Danh Mục</label>
 						  	<select class="form-control" name="fk_catid">
@@ -117,7 +128,81 @@
 			</div>
 		</div>
 	</div>
+	<form id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	  <style type="text/css">
+	  	.chosen-container{
+	  		width: 100% !important;
+	  	}
+	  </style>
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title">Thêm đặc tính</h3>
+			</div>
+			<div class="box-body">
+				<input type="hidden" name="fk_productid" value="<?php echo e($index->id); ?>">
+				<div class="form-group">
+				  <label>Màu</label>
+				  <select name="fk_colorid">
+				  	<option value="0">Chọn màu</option>
+				  	<?php foreach($colors as $val): ?>
+				  	<option value="<?php echo e($val->id); ?>"><?php echo e(ucfirst($val->name)); ?></option>
+				  	<?php endforeach; ?>
+				  </select>
+				</div>
+				<img src="" id="rs_img" width="100">
+				<input type="file" accept="image/*" name="attr_image">
+			</div>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-success pull-right save-attr">Lưu</button>
+				<img width="20" style="margin: 5px 10px 0 0 ; display: none" class="pull-right" src="<?php echo e(asset('assets/admin/img/loading.gif')); ?>" id="loading">
+
+			</div>
+			<!-- /.box-body -->
+		</div>
+
+	    </div>
+
+	  </div>
+	</form>
 </section>
+<script type="text/javascript">
+	$('a.delete_img').click(function(){
+		if(!window.confirm('Thao tác này không thể khôi phục . Bạn có thực sự muốn xóa ?')){ 
+	        return false;
+	    }
+	});
+	
+	$('input[name="pk_img"]').click(function(){
+		var val = $(this).val();
+		window.location.href = '<?php echo e(route("backend.product.product.pk_img",'')); ?>/'+val;
+	});
+	
+	$("form#myModal").on('submit',(function(e) {
+		e.preventDefault();
+		$('#loading').show();
+		$.ajax({
+			url: "<?php echo e(route('add_attr_product')); ?>", // Url to which the request is send
+			type: "POST",             // Type of request to be send, called as method
+			data: new FormData($(this)), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+			success: function(data)   // A function to be called if request succeeds
+			{
+				$('#loading').hide();
+				alert(data);
+			},
+			error: function()
+			{
+				alert('ajax ko thành công');
+			}
+		}).always(function(){
+
+            $('#loading').hide();
+
+        });
+	}));
+</script>
 <!-- /.content -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('backend.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

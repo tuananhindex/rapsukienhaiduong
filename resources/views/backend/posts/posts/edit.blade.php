@@ -249,6 +249,7 @@
 	    CKEDITOR.instances.lang_content.insertHtml('<a href=\x22' + href + '\x22>'+ res[1] +'</a>');
 
 	});
+	
 	var ajax_sendding = false;
 
     $(".save-lang").click(function(e){

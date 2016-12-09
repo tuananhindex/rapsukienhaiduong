@@ -38,11 +38,11 @@
 						  <input type="text" class="form-control" name="alias" placeholder="Nhập đường dẫn ảo" value="{{ $index->alias }}" required="">
 						</div>
 						<div class="form-group">
-						  <label>Ảnh đại diện</label>
+						  <label>Ảnh</label>
 						  <input type="file" name="image">
 						</div>
 						<div class="form-group">
-							<img src="{{ asset($index->image) }}" width="200">
+							<img src="{{ asset($index->image) }}" width="100">
 						</div>
 						<div class="form-group">
 						  	<label>Thành Phần Cha</label>

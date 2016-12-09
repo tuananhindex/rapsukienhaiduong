@@ -33,58 +33,19 @@
 						  <label>Tên</label>
 						  <input type="text" class="form-control" name="name" placeholder="Nhập tên" required="">
 						</div>
+						
 						<div class="form-group">
-						  <label>Đường Dẫn Ảo</label>
-						  <input type="text" class="form-control add-alias" name="alias" placeholder="Nhập đường dẫn ảo" required="">
-						</div>
-						<div class="form-group">
-						  <label>Ảnh</label>
-						  <input type="file" name="image[]" multiple="">
-						</div>
-						<div class="form-group">
-						  	<label>Danh Mục</label>
-						  	<select class="form-control" name="fk_catid">
-								<option value="0">Không</option>
-								<?php echo $MultiLevelSelect; ?>
-
-							</select>
-						</div>
-						<div class="form-group">
-						  <label>Giá</label>
-						  <input type="number" class="form-control" name="price" placeholder="Nhập giá tiền">
-						</div>
-						<div class="form-group">
-						  <label>Khuyến mãi (%)</label>
-						  <input type="number" class="form-control" name="promotion" placeholder="Nhập khuyến mãi">
-						</div>
-						<div class="form-group">
-						  <label>Thứ Tự</label>
-						  <input type="number" class="form-control" name="order" placeholder="Hiển thị theo thứ tự từ lớn đến bé" >
-						</div>
-						<div class="form-group">
-						  <label>Mô tả</label>
-						  <textarea class="form-control" name="description" id="description"></textarea>
-						  
+						  <label>Vị Trí</label>
+						  <input type="number" class="form-control" name="position" placeholder="Nhập vị trí" required="">
 						</div>
 
 						<div class="form-group">
-						  <label>Nội dung</label>
-						  <textarea class="form-control" name="content"></textarea>
+						  <label>Nội Dung</label>
+						  <textarea class="form-control" name="content" id="content"></textarea>
 						  <script type="text/javascript">ckeditor('content')</script>
 						</div>
 						
-						<div class="form-group">
-						  <label>Meta Title</label>
-						  <input type="text" class="form-control" name="meta_title">
-						</div>
-						<div class="form-group">
-						  <label>Meta Description</label>
-						  <textarea class="form-control" name="meta_description"></textarea>
-						</div>
-						<div class="form-group">
-						  <label>Meta Keywords</label>
-						  <input type="text" class="form-control" name="meta_keywords" placeholder="eg : abc,xyz,qwe,...">
-						</div>
+						
 						<div class="form-group">
 							<label>Trạng Thái</label>
 							<select class="form-control" name="status">
